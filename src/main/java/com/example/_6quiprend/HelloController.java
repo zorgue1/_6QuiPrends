@@ -1,4 +1,4 @@
-package com.example._6quiprends;
+package com.example._6quiprend;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
