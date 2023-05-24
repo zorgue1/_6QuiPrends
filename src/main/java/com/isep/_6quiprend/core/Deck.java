@@ -1,5 +1,6 @@
 package com.isep._6quiprend.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -19,10 +20,11 @@ public class Deck {
         this.deck = deck;
     }
 
-    public Card assignCard(){
+    public static Card assignCard(){
         Random random = new Random();
         int number = random.nextInt(1,104);
         Card card = new Card(number);
         return card;
     }
+
 }
