@@ -14,26 +14,6 @@ public class Player {
         this.name=name;
     }
 
-    public Deck assignDeck() {
-        List<Card> cards = new ArrayList<>();
-        while (cards.size() < 11) {
-            Card newCard = Deck.assignCard();
-            boolean isUnique = true;
 
-            for (Card cardInDeck : cards) {
-                if (cardInDeck.getNumber() == newCard.getNumber()) {
-                    isUnique = false;
-                    break;
-                }
-            }
-
-            if (isUnique) {
-                cards.add(newCard);
-            }
-        }
-
-        Deck deck = new Deck(cards);
-        return deck;
-    }
 
 }

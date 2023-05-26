@@ -27,4 +27,25 @@ public class Deck {
         return card;
     }
 
+    public Deck assignDeck() {
+        List<Card> cards = new ArrayList<>();
+        while (cards.size() < 11) {
+            Card newCard = assignCard();
+            boolean isUnique = true;
+
+            for (Card cardInDeck : cards) {
+                if (cardInDeck.getNumber() == newCard.getNumber()) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                cards.add(newCard);
+            }
+        }
+
+        Deck deck = new Deck(cards);
+        return deck;
+    }
+
 }
