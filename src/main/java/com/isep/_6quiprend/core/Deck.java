@@ -1,6 +1,7 @@
 package com.isep._6quiprend.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,32 +21,17 @@ public class Deck {
         this.deck = deck;
     }
 
-    public static Card assignCard(){
-        Random random = new Random();
-        int number = random.nextInt(1,104);
-        Card card = new Card(number);
-        return card;
-    }
-
-    public Deck assignDeck() {
+    public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
-        while (cards.size() < 11) {
-            Card newCard = assignCard();
-            boolean isUnique = true;
-
-            for (Card cardInDeck : cards) {
-                if (cardInDeck.getNumber() == newCard.getNumber()) {
-                    isUnique = false;
-                    break;
-                }
-            }
-            if (isUnique) {
-                cards.add(newCard);
-            }
+        for (int i = 0; i < 104; i++) {
+            cards.add(new Card(i, Card.getCardBeefHead(i)));
         }
-
-        Deck deck = new Deck(cards);
-        return deck;
+        return cards;
     }
+
+
+
+
+
 
 }

@@ -10,22 +10,34 @@ public class Game {
     }
 
     private void initialize(){
-        List<Card> allCard = new ArrayList<>();
-        for (int i = 0; i <104; i++)
-        {
-            Card card = new Card(i);
-            allCard.add(card);
-        }
 
+        List<Card> allCard = Deck.createCards();
         Collections.shuffle(allCard);
 
-        Deck deck1 = getPlayerDeck(allCard);
-        Deck deck2 = getPlayerDeck(allCard);
+        List<Player> players = new ArrayList<>();
+        int nbOfPlayer = 2; //a recuperer à partir du choix d'utilisateur
+        //création des joueurs avec leur paquet de jeu
+        for (int i = 1; i<=nbOfPlayer; i++)
+        {
+            String name = ""; //recuperer le nom saisi à partir de l'interface avec un index EX: name_1 pour player_1, name_2 pour player_2 etc
+            Deck deck = getPlayerDeck(allCard);
+            List<Card> retrivedCards = new ArrayList<>();
+            RetrivedPack pack = new RetrivedPack(retrivedCards);
+            players.add(new Player(name, deck, pack));
+        }
 
-        String name1 = "nom1"; //valeurs à recuperer
-        String name2 = "nom2"; //
-        Player player1 = new Player(name1, deck1);
-        Player player2 = new Player(name2, deck2);
+        //poser 4 cartes sur la table
+        List<Series> seriesListInTable = new ArrayList<>();
+        for (int i = 0; i<4; i++)
+        {
+            List<Card> cardList = new ArrayList<>();
+            cardList.add(allCard.get(i));
+            Series series = new Series(cardList);
+            seriesListInTable.add(series);
+        }
+
+
+
     }
 
     private Deck getPlayerDeck(List<Card> cards){
@@ -37,6 +49,8 @@ public class Game {
         }
         return new Deck(cardList);
     }
+
+
 
 
 }

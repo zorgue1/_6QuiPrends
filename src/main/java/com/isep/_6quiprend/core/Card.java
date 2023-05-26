@@ -9,11 +9,9 @@ public class Card {
     private int beefHead ;
     private ImageIcon imageIcon;
 
-    public Card(int number) {
+    public Card(int number, int beefHead) {
         this.number = number;
-        setBeefHead(number);
-        URL url = getClass().getResource("/image/"+number+".png");
-        if(url!=null) this.imageIcon = new ImageIcon(url);
+        this.beefHead = beefHead;
     }
 
     public int getNumber() {
@@ -29,21 +27,21 @@ public class Card {
     }
 
     public void setBeefHead(int number) {
-
-        int beefHead = 0 ;
-
-        if (number % 10 == 5) {
-            beefHead += 2;
-        } else if (number % 10 == 0) {
-            beefHead += 3;
-        } else if (number % 11 == 0) {
-            beefHead += 5;
-        } else {
-            beefHead = 1;
-        }
-
         this.beefHead = beefHead ;
+    }
 
+    public static int getCardBeefHead(int number) {
+        if (number == 55) {
+            return 7;
+        } else if (number % 11 == 0) {
+            return 5;
+        } else if(number % 10 == 0) {
+            return 3;
+        } else if (number % 5 == 0) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
 

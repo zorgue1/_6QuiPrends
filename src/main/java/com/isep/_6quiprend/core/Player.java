@@ -8,10 +8,13 @@ public class Player {
     private Deck deck;
     private String name;
 
-    public Player(String name, Deck deck)
+    private RetrivedPack pack;
+
+    public Player(String name, Deck deck, RetrivedPack pack)
     {
         this.name = name;
         this.deck = deck;
+        this.pack = pack;
     }
 
 
