@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Game {
 
+    private List<Series> seriesListInTable;
     public Game(){
     }
 
@@ -27,7 +28,7 @@ public class Game {
         }
 
         //poser 4 cartes sur la table
-        List<Series> seriesListInTable = new ArrayList<>();
+
         for (int i = 0; i<4; i++)
         {
             List<Card> cardList = new ArrayList<>();
@@ -36,9 +37,73 @@ public class Game {
             seriesListInTable.add(series);
         }
 
+        List<Integer> choosenNumberList = new ArrayList<>(); //si retourne nombre de la carte choisie
+        for (Player player : players)
+        {
+            //choisir la carte
+            int number = 2; //recuperer la valeur
+            choosenNumberList.add(number);
+        }
+
+//        int minForBeginning = Collections.min(choosenNumberList);
+
+        ////////a reflechir sur l'ordre de commencement des joueurs peut etre dictionnaire pour lier carte choisie et joueur/////////
+
+        for (int number : choosenNumberList)
+        {
+            //recuperer la serie que le joueur a choisi
+            Series choosenSeries = seriesListInTable.get(0); //ex
+            Card playerCard = new Card(number);
+            Card lastCardInSeries = choosenSeries.getLastCardOf();
+            if (lastCardInSeries.getNumber() > playerCard.getNumber()) //carte + grande oui
+                break;
+
+            if (!getTheSeriesWithSmallestDifference(playerCard).equals(choosenSeries))
+                break;
+            if (choosenSeries.getNbOfCard() == 5)
+            {
+                seriesListInTable.set(0, Series.newSeries(playerCard)); //a modifier car ici utilise direct index tout dépend ce qui retourne
+                break;
+            }
+            if (isCardTooWeak(playerCard))
+            {
+                //carte trop faible
+                //choisi le paquet qu'il souhaite recuperer
+                Series takenSeries = seriesListInTable.get(1);
+                seriesListInTable.set(1, Series.newSeries(playerCard));
+                break;
+            }
+        }
 
 
     }
+
+    public boolean isCardTooWeak(Card card){
+        List<Boolean> list = new ArrayList<>();
+        for (Series series : seriesListInTable)
+        {
+            list.add(series.getLastCardOf().getNumber() < card.getNumber());
+        }
+        if (list.indexOf(Boolean.TRUE) == -1)
+            return true;
+        else
+            return false;
+
+    }
+    public Series getTheSeriesWithSmallestDifference(Card card){
+        List<Integer> diffList = new ArrayList<>();
+        for (Series series : seriesListInTable)
+        {
+            int difference = series.getDifferenceBetweenLastAndNew(card);
+            diffList.add(difference);
+        }
+        int min = Collections.min(diffList);
+        int index = diffList.indexOf(min);
+        return seriesListInTable.get(index);
+
+    }
+
+
 
     private Deck getPlayerDeck(List<Card> cards){
         List<Card> cardList = new ArrayList<>();

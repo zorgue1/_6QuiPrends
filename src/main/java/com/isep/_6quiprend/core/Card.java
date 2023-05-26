@@ -9,9 +9,8 @@ public class Card {
     private int beefHead ;
     private ImageIcon imageIcon;
 
-    public Card(int number, int beefHead) {
+    public Card(int number) {
         this.number = number;
-        this.beefHead = beefHead;
     }
 
     public int getNumber() {
@@ -30,14 +29,14 @@ public class Card {
         this.beefHead = beefHead ;
     }
 
-    public static int getCardBeefHead(int number) {
-        if (number == 55) {
+    public int getCardBeefHead() {
+        if (this.number == 55) {
             return 7;
-        } else if (number % 11 == 0) {
+        } else if (this.number % 11 == 0) {
             return 5;
-        } else if(number % 10 == 0) {
+        } else if(this.number % 10 == 0) {
             return 3;
-        } else if (number % 5 == 0) {
+        } else if (this.number % 5 == 0) {
             return 2;
         } else {
             return 1;

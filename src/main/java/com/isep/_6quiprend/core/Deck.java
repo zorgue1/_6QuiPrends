@@ -24,7 +24,7 @@ public class Deck {
     public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < 104; i++) {
-            cards.add(new Card(i, Card.getCardBeefHead(i)));
+            cards.add(new Card(i));
         }
         return cards;
     }
