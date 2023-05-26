@@ -12,7 +12,7 @@ public class Card {
     public Card(int number) {
         this.number = number;
         setBeefHead(number);
-        URL url = getClass().getResource("../../example/_6quiprend/resources/"+number+".png");
+        URL url = getClass().getResource("/image/"+number+".png");
         if(url!=null) this.imageIcon = new ImageIcon(url);
     }
 
@@ -36,7 +36,7 @@ public class Card {
             beefHead += 2;
         } else if (number % 10 == 0) {
             beefHead += 3;
-        } else if (number == 11 || number == 22) {
+        } else if (number == 11 || number == 22) { //
             beefHead += 5;
         } else {
             beefHead = 1;
