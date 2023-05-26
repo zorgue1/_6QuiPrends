@@ -8,10 +8,10 @@ public class Player {
     private Deck deck;
     private String name;
 
-    public Player(Deck deck,String name)
+    public Player(String name, Deck deck)
     {
+        this.name = name;
         this.deck = deck;
-        this.name=name;
     }
 
 
