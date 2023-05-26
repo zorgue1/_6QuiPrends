@@ -23,22 +23,7 @@ public class Card {
     }
 
     public void setBeefHead(int number) {
-
-        int beefHead = 0 ;
-
-
-        if (number % 10 == 5) {
-            beefHead += 2;
-        } else if (number % 10 == 0) {
-            beefHead += 3;
-        } else if (number == 11 || number == 22) {
-            beefHead += 5;
-        } else {
-            beefHead = 1;
-        }
-
         this.beefHead = beefHead ;
-
     }
 }
 
