@@ -36,7 +36,7 @@ public class Card {
             beefHead += 2;
         } else if (number % 10 == 0) {
             beefHead += 3;
-        } else if (number == 11 || number == 22) { //
+        } else if (number % 11 == 0) {
             beefHead += 5;
         } else {
             beefHead = 1;
