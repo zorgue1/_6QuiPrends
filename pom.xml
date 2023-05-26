@@ -38,6 +38,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.twelvemonkeys</groupId>
+            <artifactId>twelvemonkeys</artifactId>
+            <version>3.9.3</version>
+        </dependency>
     </dependencies>
 
     <build>

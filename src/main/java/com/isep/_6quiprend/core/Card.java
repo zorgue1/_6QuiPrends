@@ -1,13 +1,19 @@
 package com.isep._6quiprend.core;
 
+import java.net.URL;
+import javax.swing.ImageIcon;
+
 public class Card {
 
     private int number ;
     private int beefHead ;
+    private ImageIcon imageIcon;
 
     public Card(int number) {
         this.number = number;
         setBeefHead(number);
+        URL url = getClass().getResource("../../example/_6quiprend/resources/"+number+".png");
+        if(url!=null) this.imageIcon = new ImageIcon(url);
     }
 
     public int getNumber() {
@@ -25,7 +31,6 @@ public class Card {
     public void setBeefHead(int number) {
 
         int beefHead = 0 ;
-
 
         if (number % 10 == 5) {
             beefHead += 2;
