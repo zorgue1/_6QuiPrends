@@ -1,8 +1,6 @@
 package com.isep._6quiprend.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Game {
 
@@ -37,47 +35,111 @@ public class Game {
             seriesListInTable.add(series);
         }
 
-        List<Integer> choosenNumberList = new ArrayList<>(); //si retourne nombre de la carte choisie
+        while (!areAllDeckEmpty(players))
+        {
+            List<Integer> choosenNumberList = new ArrayList<>(); //si retourne nombre de la carte choisie
+            LinkedHashMap<Card, Player> getPlayerFromChoosenCard = new LinkedHashMap<>();
+            for (Player player : players)
+            {
+                //choisir la carte
+                int number = 2; //recuperer la valeur
+                choosenNumberList.add(number);
+                getPlayerFromChoosenCard.put(new Card(number), player); //si renvoie nombre
+            }
+
+            int minForBeginning = Collections.min(choosenNumberList);
+
+            Collections.sort(choosenNumberList);
+
+
+            for (int number : choosenNumberList)
+            {
+                Card playerCard = new Card(number);
+                System.out.println(getPlayerFromChoosenCard.get(playerCard).getName()); // il faut afficher le player qui joue
+
+
+                boolean isPossible = false;
+                while (!isPossible)
+                {
+                    //recuperer la serie que le joueur a choisi
+                    Series choosenSeries = seriesListInTable.get(0); //ex
+                    Card lastCardInSeries = choosenSeries.getLastCardOf();
+
+
+                    if (lastCardInSeries.getNumber() < playerCard.getNumber()) //carte joueur + grande oui
+                    {
+                        if (getTheSeriesWithSmallestDifference(playerCard).equals(choosenSeries))
+                        {
+                            if (choosenSeries.getNbOfCard() == 5)
+                            {
+                                seriesListInTable.set(0, Series.newSeries(playerCard)); //a modifier car ici utilise direct index tout dépend ce qui retourne
+                                removeCard(getPlayerFromChoosenCard.get(playerCard), playerCard);
+                                isPossible = true; // sortir de la boucle while
+                            }
+                            else
+                            {
+                                removeCard(getPlayerFromChoosenCard.get(playerCard), playerCard);
+                                addInSeries(choosenSeries, playerCard);
+                                addPack(getPlayerFromChoosenCard.get(playerCard), choosenSeries.getCardsInTable());
+                                isPossible = true;
+                            }
+                        }
+                    }
+                    else if (isCardTooWeak(playerCard))
+                    {
+                        //carte trop faible
+                        //choisi le paquet qu'il souhaite recuperer
+                        Series takenSeries = seriesListInTable.get(1); //choisi serie 1
+                        seriesListInTable.set(1, Series.newSeries(playerCard)); //nouvelle serie 1 avec la carte joueur
+                        removeCard(getPlayerFromChoosenCard.get(playerCard), playerCard);
+                        addPack(getPlayerFromChoosenCard.get(playerCard), takenSeries.getCardsInTable());
+                        isPossible = true;
+                    }
+                }
+            }
+
+        }
+
+        List<Integer> pointList = new ArrayList<>();
+        HashMap<Integer, Player> getPlayerByPoint = new HashMap<>();
         for (Player player : players)
         {
-            //choisir la carte
-            int number = 2; //recuperer la valeur
-            choosenNumberList.add(number);
+            int point = player.getPack().getTotalBeefHead();
+            pointList.add(point);
+            getPlayerByPoint.put(point, player);
         }
 
-//        int minForBeginning = Collections.min(choosenNumberList);
-
-        ////////a reflechir sur l'ordre de commencement des joueurs peut etre dictionnaire pour lier carte choisie et joueur/////////
-
-        for (int number : choosenNumberList)
-        {
-            //recuperer la serie que le joueur a choisi
-            Series choosenSeries = seriesListInTable.get(0); //ex
-            Card playerCard = new Card(number);
-            Card lastCardInSeries = choosenSeries.getLastCardOf();
-            if (lastCardInSeries.getNumber() > playerCard.getNumber()) //carte + grande oui
-                break;
-
-            if (!getTheSeriesWithSmallestDifference(playerCard).equals(choosenSeries))
-                break;
-            if (choosenSeries.getNbOfCard() == 5)
-            {
-                seriesListInTable.set(0, Series.newSeries(playerCard)); //a modifier car ici utilise direct index tout dépend ce qui retourne
-                break;
-            }
-            if (isCardTooWeak(playerCard))
-            {
-                //carte trop faible
-                //choisi le paquet qu'il souhaite recuperer
-                Series takenSeries = seriesListInTable.get(1);
-                seriesListInTable.set(1, Series.newSeries(playerCard));
-                break;
-            }
-        }
-
-
+        int minPoint = Collections.min(pointList);
+        //annoncer le gagnant
+        System.out.println("The winner is " + getPlayerByPoint.get(minPoint));
     }
 
+    public void addPack(Player player, List<Card> cards){
+        player.setPack(new RetrivedPack(cards));
+    }
+    public boolean areAllDeckEmpty(List<Player> players)
+    {
+        List<Boolean> stateList = new ArrayList<>();
+        for (Player player : players)
+        {
+            Boolean isEmpty = player.getDeck().getDeck().isEmpty();
+            stateList.add(isEmpty);
+        }
+        if (stateList.indexOf(Boolean.FALSE) == -1)
+            return true;
+        else
+            return false;
+    }
+    public void removeCard(Player player, Card card){
+        List<Card> cards = player.getDeck().getDeck();
+        cards.remove(card);
+        player.setDeck(new Deck(cards));
+    }
+    public void addInSeries(Series series, Card card){
+        List<Card> cards = series.getCardsInTable();
+        cards.add(card);
+        series.setCardsInTable(cards);
+    }
     public boolean isCardTooWeak(Card card){
         List<Boolean> list = new ArrayList<>();
         for (Series series : seriesListInTable)

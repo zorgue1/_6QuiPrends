@@ -14,6 +14,14 @@ public class Series {
         this.cardsInTable = cardsInTable;
     }
 
+    public List<Card> getCardsInTable() {
+        return cardsInTable;
+    }
+
+    public void setCardsInTable(List<Card> cardsInTable) {
+        this.cardsInTable = cardsInTable;
+    }
+
     public Card getLastCardOf(){
         return this.cardsInTable.get(cardsInTable.size()-1);
     }
