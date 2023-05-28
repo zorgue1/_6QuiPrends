@@ -42,6 +42,11 @@ public class Card {
             return 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Card number " + this.getNumber();
+    }
 }
 
 

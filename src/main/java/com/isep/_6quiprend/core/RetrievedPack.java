@@ -2,11 +2,11 @@ package com.isep._6quiprend.core;
 
 import java.util.List;
 
-public class RetrivedPack {
+public class RetrievedPack {
 
     private List<Card> pack;
 
-    public RetrivedPack(List<Card> pack) {
+    public RetrievedPack(List<Card> pack) {
         this.pack = pack;
     }
 

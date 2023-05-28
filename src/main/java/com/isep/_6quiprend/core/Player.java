@@ -1,16 +1,13 @@
 package com.isep._6quiprend.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Player {
 
     private Deck deck;
     private String name;
 
-    private RetrivedPack pack;
+    private RetrievedPack pack;
 
-    public Player(String name, Deck deck, RetrivedPack pack)
+    public Player(String name, Deck deck, RetrievedPack pack)
     {
         this.name = name;
         this.deck = deck;
@@ -29,11 +26,16 @@ public class Player {
         return name;
     }
 
-    public RetrivedPack getPack() {
+    public RetrievedPack getPack() {
         return pack;
     }
 
-    public void setPack(RetrivedPack pack) {
+    public void setPack(RetrievedPack pack) {
         this.pack = pack;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }
