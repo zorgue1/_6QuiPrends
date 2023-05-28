@@ -15,7 +15,6 @@ public class HelloController {
     }
 
     @FXML private Button play;
-
     @FXML private Button playAlone;
     @FXML private Button multiPlay;
 
@@ -25,6 +24,10 @@ public class HelloController {
         playAlone.setVisible(true);
         multiPlay.setVisible(true);
         play.setVisible(false);
+
+    }
+
+    public void playAlone(ActionEvent actionEvent){
 
     }
 
