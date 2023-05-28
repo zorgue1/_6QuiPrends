@@ -6,21 +6,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.HelloController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@image6quiprend/tapis.jpg" />
+            <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="448.0" layoutY="534.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="PLAY">
-         <font>
-            <Font size="58.0" />
-         </font></Button>
       <ImageView fitHeight="436.0" fitWidth="1152.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@image6quiprend/6_qui_prend_!.jpg" />
+            <Image url="@image/6_qui_prend_!.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="playAlone" layoutX="498.0" layoutY="534.0" mnemonicParsing="false" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Play Alone ">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="multiPlay" layoutX="494.0" layoutY="596.0" mnemonicParsing="false" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Multi Player">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="play" layoutX="449.0" layoutY="525.0" mnemonicParsing="false" onAction="#play" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="PLAY">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
