@@ -44,7 +44,8 @@ public class Series {
     }
 
     public static Series newSeries(int position, Card card){
-        List<Card> cardList = Arrays.asList(card);
+        List<Card> cardList = new ArrayList<>();
+        cardList.add(card);
         return new Series(position, cardList);
     }
 

@@ -18,4 +18,8 @@ public class RetrievedPack {
         }
         return total;
     }
+
+    public List<Card> getCardsInPack() {
+        return pack;
+    }
 }

@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Deck {
 
+    private static int MIN_VALUE = 1;
+    private static int MAX_VALUE = 104;
+
     private List<Card> cards;
 
     public Deck(List<Card> cards) {
@@ -21,7 +24,7 @@ public class Deck {
 
     public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
-        for (int i = 1; i <= 104; i++) {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             cards.add(new Card(i));
         }
         return cards;

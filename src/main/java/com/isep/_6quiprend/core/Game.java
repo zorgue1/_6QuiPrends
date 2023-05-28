@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Game {
 
+    private static int NBOFCARDBYDECK = 2;
     private List<Series> seriesListInTable = new ArrayList<>();
     private final List<Player> players;
 
@@ -152,6 +153,8 @@ public class Game {
     }
     public void addInSeries(Series series, Card card){
         List<Card> cards = series.getCardsInTable();
+        System.out.println("series " + series.getCardsInTable());
+        System.out.println("card " + cards);
         cards.add(card);
         series.setCardsInTable(cards);
     }
@@ -169,13 +172,16 @@ public class Game {
     }
     public Series getTheSeriesWithSmallestDifference(Card card){
         List<Integer> diffList = new ArrayList<>();
+        List<Integer> positiveList = new ArrayList<>();
         for (Series series : this.seriesListInTable)
         {
             int difference = series.getDifferenceBetweenLastAndNew(card);
+            diffList.add(difference);
             if (difference > 0)
-                diffList.add(difference);
+                positiveList.add(difference);
         }
-        int min = Collections.min(diffList);
+        int min = Collections.min(positiveList);
+
         int index = diffList.indexOf(min);
         return this.seriesListInTable.get(index);
 
@@ -185,7 +191,7 @@ public class Game {
 
     public Deck getPlayerDeck(){
         List<Card> cardList = new ArrayList<>();
-        for (int i = 0; i< 10; i++)
+        for (int i = 0; i< NBOFCARDBYDECK; i++)
         {
             cardList.add(this.allCard.get(i));
             this.allCard.remove(this.allCard.get(i));
