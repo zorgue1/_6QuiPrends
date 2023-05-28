@@ -9,9 +9,16 @@ import static java.lang.Math.abs;
 public class Series {
 
     private List<Card> cardsInTable;
-    public Series(List<Card> cardsInTable)
+    private int position;
+    public Series(int position, List<Card> cardsInTable)
     {
+        this.position = position;
         this.cardsInTable = cardsInTable;
+    }
+
+    @Override
+    public String toString() {
+        return "Series " + position;
     }
 
     public List<Card> getCardsInTable() {
@@ -29,15 +36,19 @@ public class Series {
     public int getDifferenceBetweenLastAndNew(Card newCard){
         int nbOfLastCard = getLastCardOf().getNumber();
         int nbOfNewCard = newCard.getNumber();
-        return abs(nbOfLastCard - nbOfNewCard);
+        return nbOfNewCard - nbOfLastCard;
     }
 
     public int getNbOfCard(){
         return this.cardsInTable.size();
     }
 
-    public static Series newSeries(Card card){
+    public static Series newSeries(int position, Card card){
         List<Card> cardList = Arrays.asList(card);
-        return new Series(cardList);
+        return new Series(position, cardList);
+    }
+
+    public int getPosition() {
+        return position;
     }
 }

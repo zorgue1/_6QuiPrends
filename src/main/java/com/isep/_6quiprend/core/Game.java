@@ -137,7 +137,7 @@ public class Game {
         List<Boolean> stateList = new ArrayList<>();
         for (Player player : players)
         {
-            Boolean isEmpty = player.getDeck().getDeck().isEmpty();
+            Boolean isEmpty = player.getDeck().getCards().isEmpty();
             stateList.add(isEmpty);
         }
         if (stateList.indexOf(Boolean.FALSE) == -1)
@@ -146,7 +146,7 @@ public class Game {
             return false;
     }
     public void removeCard(Player player, Card card){
-        List<Card> cards = player.getDeck().getDeck();
+        List<Card> cards = player.getDeck().getCards();
         cards.remove(card);
         player.setDeck(new Deck(cards));
     }
@@ -169,14 +169,15 @@ public class Game {
     }
     public Series getTheSeriesWithSmallestDifference(Card card){
         List<Integer> diffList = new ArrayList<>();
-        for (Series series : seriesListInTable)
+        for (Series series : this.seriesListInTable)
         {
             int difference = series.getDifferenceBetweenLastAndNew(card);
-            diffList.add(difference);
+            if (difference > 0)
+                diffList.add(difference);
         }
         int min = Collections.min(diffList);
         int index = diffList.indexOf(min);
-        return seriesListInTable.get(index);
+        return this.seriesListInTable.get(index);
 
     }
 
@@ -192,11 +193,11 @@ public class Game {
         return new Deck(cardList);
     }
 
-    public void initSeries(){
+    public void initSeries(int position){
         List<Card> cardList = new ArrayList<>();
         cardList.add(this.allCard.get(0));
         this.allCard.remove(this.allCard.get(0));
-        Series series = new Series(cardList);
+        Series series = new Series(position, cardList);
         this.seriesListInTable.add(series);
     }
 
