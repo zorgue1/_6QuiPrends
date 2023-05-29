@@ -21,8 +21,9 @@ public class Display {
     public void displayAllSeries(List<Series> series) {
         for(int i = 0; i<4; i++)
         {
-        displaySeriesVertically(series.get(i));
-        System.out.println("\n");
+            System.out.print(i+1 + " ");
+            displaySeriesVertically(series.get(i));
+            System.out.println("");
         }
     }
 }

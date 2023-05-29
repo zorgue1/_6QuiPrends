@@ -1,29 +1,30 @@
 package com.isep._6quiprend.core;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Deck {
 
-    private List<Card> deck;
+    private static int MIN_VALUE = 1;
+    private static int MAX_VALUE = 104;
 
-    public Deck(List<Card> deck) {
-        this.deck = deck;
+    private List<Card> cards;
+
+    public Deck(List<Card> cards) {
+        this.cards = cards;
     }
 
-    public List<Card> getDeck() {
-        return deck;
+    public List<Card> getCards() {
+        return cards;
     }
 
     public void setDeck(List<Card> deck) {
-        this.deck = deck;
+        this.cards = cards;
     }
 
     public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
-        for (int i = 0; i < 104; i++) {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             cards.add(new Card(i));
         }
         return cards;
@@ -32,6 +33,6 @@ public class Deck {
 
     @Override
     public String toString() {
-        return this.getDeck().toString();
+        return this.getCards().toString();
     }
 }

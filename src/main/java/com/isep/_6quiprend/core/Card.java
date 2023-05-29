@@ -1,6 +1,7 @@
 package com.isep._6quiprend.core;
 
 import java.net.URL;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 
 public class Card {
@@ -46,6 +47,13 @@ public class Card {
     @Override
     public String toString() {
         return "Card number " + this.getNumber();
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return getNumber() == card.getNumber();
     }
 }
 

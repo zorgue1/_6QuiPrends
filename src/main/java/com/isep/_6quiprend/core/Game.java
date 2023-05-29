@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Game {
 
+    private static int NBOFCARDBYDECK = 2;
     private List<Series> seriesListInTable = new ArrayList<>();
     private final List<Player> players;
 
@@ -137,7 +138,7 @@ public class Game {
         List<Boolean> stateList = new ArrayList<>();
         for (Player player : players)
         {
-            Boolean isEmpty = player.getDeck().getDeck().isEmpty();
+            Boolean isEmpty = player.getDeck().getCards().isEmpty();
             stateList.add(isEmpty);
         }
         if (stateList.indexOf(Boolean.FALSE) == -1)
@@ -146,12 +147,14 @@ public class Game {
             return false;
     }
     public void removeCard(Player player, Card card){
-        List<Card> cards = player.getDeck().getDeck();
+        List<Card> cards = player.getDeck().getCards();
         cards.remove(card);
         player.setDeck(new Deck(cards));
     }
     public void addInSeries(Series series, Card card){
         List<Card> cards = series.getCardsInTable();
+        System.out.println("series " + series.getCardsInTable());
+        System.out.println("card " + cards);
         cards.add(card);
         series.setCardsInTable(cards);
     }
@@ -169,14 +172,18 @@ public class Game {
     }
     public Series getTheSeriesWithSmallestDifference(Card card){
         List<Integer> diffList = new ArrayList<>();
-        for (Series series : seriesListInTable)
+        List<Integer> positiveList = new ArrayList<>();
+        for (Series series : this.seriesListInTable)
         {
             int difference = series.getDifferenceBetweenLastAndNew(card);
             diffList.add(difference);
+            if (difference > 0)
+                positiveList.add(difference);
         }
-        int min = Collections.min(diffList);
+        int min = Collections.min(positiveList);
+
         int index = diffList.indexOf(min);
-        return seriesListInTable.get(index);
+        return this.seriesListInTable.get(index);
 
     }
 
@@ -184,7 +191,7 @@ public class Game {
 
     public Deck getPlayerDeck(){
         List<Card> cardList = new ArrayList<>();
-        for (int i = 0; i< 10; i++)
+        for (int i = 0; i< NBOFCARDBYDECK; i++)
         {
             cardList.add(this.allCard.get(i));
             this.allCard.remove(this.allCard.get(i));
@@ -192,11 +199,11 @@ public class Game {
         return new Deck(cardList);
     }
 
-    public void initSeries(){
+    public void initSeries(int position){
         List<Card> cardList = new ArrayList<>();
         cardList.add(this.allCard.get(0));
         this.allCard.remove(this.allCard.get(0));
-        Series series = new Series(cardList);
+        Series series = new Series(position, cardList);
         this.seriesListInTable.add(series);
     }
 
