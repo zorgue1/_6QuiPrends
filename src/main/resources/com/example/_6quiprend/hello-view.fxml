@@ -18,7 +18,7 @@
             <Image url="@image/6_qui_prend_!.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="playAlone" layoutX="498.0" layoutY="534.0" mnemonicParsing="false" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Play Alone ">
+      <Button fx:id="playAlone" layoutX="498.0" layoutY="534.0" mnemonicParsing="false"  style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Play Alone ">
          <font>
             <Font size="25.0" />
          </font>

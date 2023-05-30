@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
     @FXML
@@ -18,6 +21,8 @@ public class HelloController {
     @FXML private Button playAlone;
     @FXML private Button multiPlay;
 
+    HelloApplication helloApplication;
+
 
     public void play(ActionEvent actionEvent) {
 
@@ -27,9 +32,6 @@ public class HelloController {
 
     }
 
-    public void playAlone(ActionEvent actionEvent){
-
-    }
 
 
 }
