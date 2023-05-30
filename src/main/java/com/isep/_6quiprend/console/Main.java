@@ -61,7 +61,7 @@ public class Main {
             HashMap<Integer, Player> getPlayerFromChoosenCard = new HashMap<>();
             for (Player player : players)
             {
-                display.printText("It's " + player.getName() + "'s turn");
+                display.printTextInBlue("It's " + player.getName() + "'s turn");
                 display.printText("Which card do you want to play?");
                 display.printText("Your deck : " + player.getDeck().toString());
                 //choisir la carte
@@ -77,7 +77,7 @@ public class Main {
                 Card playerCard = new Card(number);
 
 
-                display.printText("It's " + getPlayerFromChoosenCard.get(number) + "'s turn");
+                display.printTextInBlue("It's " + getPlayerFromChoosenCard.get(number) + "'s turn");
 
                 boolean isPossible = false;
                 while (!isPossible)
@@ -102,32 +102,29 @@ public class Main {
                                 Series newSeries = Series.newSeries(choosenSeries.getPosition(), playerCard);
                                 seriesListInTable.set(index, newSeries); //a modifier car ici utilise direct index tout dépend ce qui retourne
                                 game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
+                                Player player = getPlayerFromChoosenCard.get(number);
+                                List<Card> pack = player.getPack().getCardsInPack();
+                                pack.addAll(choosenSeries.getCardsInTable());
+                                player.setPack(new RetrievedPack(pack));
                                 isPossible = true; // sortir de la boucle while
                             }
                             else
                             {
                                 game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
-                                System.out.println("choosenSeries " + choosenSeries);
                                 game.addInSeries(choosenSeries, playerCard);
 //                                game.addPack(getPlayerFromChoosenCard.get(number), choosenSeries.getCardsInTable());
-
-                                Player player = getPlayerFromChoosenCard.get(number);
-                                List<Card> pack = player.getPack().getCardsInPack();
-                                pack.addAll(choosenSeries.getCardsInTable());
-                                player.setPack(new RetrievedPack(pack));
-                                System.out.println("retieved pack " + pack);
                                 display.printText("You choose the series " + choosenSeries.getPosition() + " for the card " + playerCard.toString());
                                 isPossible = true;
                             }
                         }
                         else
-                            display.printText("You can't choose this series because the difference with the last is not the smallest ");
+                            display.printTextInRed("You can't choose this series because the difference with the last is not the smallest ");
                     }
                     else if (game.isCardTooWeak(playerCard))
                     {
                         //carte trop faible
                         //choisi le paquet qu'il souhaite recuperer
-                        display.printText("Your card is too weak, please choose the series you want to take");
+                        display.printTextInRed("Your card is too weak, please choose the series you want to take");
                         int i = scanner.getInteger(); // methode verifie
                         Series takenSeries = seriesListInTable.get(i-1); //choisi serie 1
                         seriesListInTable.set(i-1, Series.newSeries(takenSeries.getPosition(), playerCard)); //nouvelle serie 1 avec la carte joueur
@@ -136,12 +133,11 @@ public class Main {
                         List<Card> pack = player.getPack().getCardsInPack();
                         pack.addAll(takenSeries.getCardsInTable());
                         player.setPack(new RetrievedPack(pack));
-                        System.out.println("retieved pack " + pack);
 //                        game.addPack(getPlayerFromChoosenCard.get(number), takenSeries.getCardsInTable());
                         isPossible = true;
                     }
                     else
-                        display.printText("You can't choose this series because your card is smaller than the last card of the series");
+                        display.printTextInRed("You can't choose this series because your card is smaller than the last card of the series");
                 }
             }
 
@@ -149,24 +145,19 @@ public class Main {
 
         List<Integer> pointList = new ArrayList<>();
         HashMap<Integer, Player> getPlayerByPoint = new HashMap<>();
-        System.out.println("PLayers " + players);
+
         int j = 0;
         for (Player player : players)
         {
-            System.out.println("player " + player);
             int point = player.getPack().getTotalBeefHead();
-            System.out.println("point " + point);
             pointList.add(point);
             getPlayerByPoint.put(point, player);
-            System.out.println("getPlayerByPoint " + getPlayerByPoint);
         }
 
         int minPoint = Collections.min(pointList);
         //annoncer le gagnant
 
-
-        display.printText("POINTS : " + getPlayerByPoint);
-        display.printText("The winner is " + getPlayerByPoint.get(minPoint));
+        display.printImportantInfo("The winner is " + getPlayerByPoint.get(minPoint));
     }
 
 }

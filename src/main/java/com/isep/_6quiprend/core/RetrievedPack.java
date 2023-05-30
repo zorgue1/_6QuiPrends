@@ -12,14 +12,22 @@ public class RetrievedPack {
 
     public int getTotalBeefHead(){
         int total = 0;
+        System.out.println("card for beef : " + this.pack.toString());
         for (Card card : this.pack)
         {
-            total += card.getBeefHead();
+            System.out.println("card " + card.toString());
+            System.out.println("beef " + card.getCardBeefHead());
+            total = total + card.getCardBeefHead();
         }
         return total;
     }
 
     public List<Card> getCardsInPack() {
         return pack;
+    }
+
+    @Override
+    public String toString() {
+        return this.getCardsInPack().toString();
     }
 }

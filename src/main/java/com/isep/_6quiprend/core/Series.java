@@ -52,4 +52,6 @@ public class Series {
     public int getPosition() {
         return position;
     }
+
 }
+

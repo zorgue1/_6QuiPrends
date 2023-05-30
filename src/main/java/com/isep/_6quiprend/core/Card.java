@@ -12,6 +12,7 @@ public class Card {
 
     public Card(int number) {
         this.number = number;
+        this.beefHead = getCardBeefHead();
     }
 
     public int getNumber() {
@@ -46,7 +47,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card number " + this.getNumber();
+        return "Card n°" + this.getNumber() + "/" + this.getBeefHead() + "\uD83D\uDC02";
     }
 
     public boolean equals(Object o) {
