@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Game {
 
-    private static int NBOFCARDBYDECK = 2;
+    private static int NBOFCARDBYDECK = 10;
     private List<Series> seriesListInTable = new ArrayList<>();
     private final List<Player> players;
 
