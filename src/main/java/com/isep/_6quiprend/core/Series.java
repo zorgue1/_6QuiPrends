@@ -53,5 +53,13 @@ public class Series {
         return position;
     }
 
+    public int getTotalBeefHead(){
+        int total = 0;
+        for (Card card : this.getCardsInTable())
+        {
+            total = total + card.getCardBeefHead();
+        }
+        return total;
+    }
 }
 

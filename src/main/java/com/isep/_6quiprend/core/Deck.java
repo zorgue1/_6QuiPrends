@@ -35,4 +35,13 @@ public class Deck {
     public String toString() {
         return this.getCards().toString();
     }
+
+    public int getTotalBeefHead(){
+        int total = 0;
+        for (Card card : this.getCards())
+        {
+            total = total + card.getCardBeefHead();
+        }
+        return total;
+    }
 }
