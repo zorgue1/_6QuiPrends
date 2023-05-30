@@ -8,31 +8,28 @@ public class AI extends Player{
         super(name, deck, pack);
     }
 
-    public LinkedHashMap<Card, Series> chooseCard(List<Series> seriesList){
-
+    public LinkedHashMap<Card, Series> chooseCard(List<Series> seriesList) {
         HashMap<Card, List<Series>> hashMap = new HashMap<>();
         LinkedHashMap<Card, Series> hashMap1 = new LinkedHashMap<>();
-        for (Card card : this.getDeck().getCards())
-        {
+
+        for (Card card : this.getDeck().getCards()) {
             List<Series> possibleSeries = new ArrayList<>();
-            for (Series series : seriesList)
-            {
-                if (series.getLastCardOf().getNumber() < card.getNumber())
-                {
+            for (Series series : seriesList) {
+                if (series.getLastCardOf().getNumber() < card.getNumber()) {
                     possibleSeries.add(series);
                 }
             }
-
-            if (seriesList.size() > 0)
-                hashMap.put(card, seriesList);
+            if (!possibleSeries.isEmpty()) {
+                hashMap.put(card, possibleSeries);
+            }
         }
 
-        for (Card possibleCard : hashMap.keySet())
-        {
+        System.out.println("HashMap1 " + hashMap);
+
+        for (Card possibleCard : hashMap.keySet()) {
             List<Integer> diffList = new ArrayList<>();
             List<Series> possibleSeriesList = hashMap.get(possibleCard);
-            for (Series series: possibleSeriesList)
-            {
+            for (Series series : possibleSeriesList) {
                 diffList.add(series.getDifferenceBetweenLastAndNew(possibleCard));
             }
             int min = Collections.min(diffList);
@@ -40,8 +37,11 @@ public class AI extends Player{
             Series choice = possibleSeriesList.get(index);
             hashMap1.put(possibleCard, choice);
         }
+
+        System.out.println("Hashmap2 " + hashMap1);
         return hashMap1;
     }
+
 
     public Card getCardFromHashMap(LinkedHashMap<Card, Series> hashMap, int index){
         int currentIndex = 0;

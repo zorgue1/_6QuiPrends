@@ -14,7 +14,7 @@ public class Main {
     Card aiCard;
     Series aiSeries;
 
-    Boolean aiTooWeak;
+    Boolean aiTooWeak = Boolean.FALSE;
     public Main(InputStream is) {
         this.game = new Game();
         this.display = new Display();
@@ -87,15 +87,18 @@ public class Main {
                         int rdValue = rd.nextInt(hashMap.size());
                         aiCard = ai.getCardFromHashMap(hashMap, rdValue);
                         aiSeries = hashMap.get(aiCard);
+                        System.out.println("AI choose the card " + aiCard.toString() + " for the series" + aiSeries.getPosition());
                     }
                     else
                     {
                         aiCard = ai.getCardTooWeak();
                         aiSeries = ai.getSeriesToRetrieve(seriesListInTable);
+                        System.out.println("AI choose the card " + aiCard.toString() + " to retrieve the series " + aiSeries.getPosition());
                         aiTooWeak = Boolean.TRUE;
                     }
                     int numberOfCard = aiCard.getNumber();
                     choosenNumberList.add(numberOfCard);
+                    getPlayerFromChoosenCard.put(numberOfCard, player);
                    display.printText("AI has finished to choose");
                 }
                 else{
@@ -113,9 +116,10 @@ public class Main {
             for (int number : choosenNumberList)
             {
                 Card playerCard = new Card(number);
-
+                display.printTextInBlue("It's " + getPlayerFromChoosenCard.get(number) + "'s turn");
                 if (number == aiCard.getNumber())
                 {
+
                     if (!aiTooWeak)
                     {
                         if (aiSeries.getNbOfCard() == 5)
@@ -149,70 +153,69 @@ public class Main {
                     }
 
                 }
-
-                display.printTextInBlue("It's " + getPlayerFromChoosenCard.get(number) + "'s turn");
-
-                boolean isPossible = false;
-                while (!isPossible)
+                else
                 {
-                    display.printText("Please choose the series you want to deposit for " + playerCard.toString());
-                    display.displayAllSeries(seriesListInTable);
-                    int index = scanner.getInteger(); //méthode qui verifie
-                    //recuperer la serie que le joueur a choisi
-
-                    Series choosenSeries = seriesListInTable.get(index-1);
-                    Card lastCardInSeries = choosenSeries.getLastCardOf();
-
-                    if (lastCardInSeries.getNumber() < number) //carte joueur + grande oui
+                    boolean isPossible = false;
+                    while (!isPossible)
                     {
+                        display.printText("Please choose the series you want to deposit for " + playerCard.toString());
+                        display.displayAllSeries(seriesListInTable);
+                        int index = scanner.getInteger(); //méthode qui verifie
+                        //recuperer la serie que le joueur a choisi
 
-                        if (game.getTheSeriesWithSmallestDifference(playerCard).getPosition() == (choosenSeries.getPosition()))
+                        Series choosenSeries = seriesListInTable.get(index-1);
+                        Card lastCardInSeries = choosenSeries.getLastCardOf();
+
+                        if (lastCardInSeries.getNumber() < number) //carte joueur + grande oui
                         {
-                            if (choosenSeries.getNbOfCard() == 5)
+
+                            if (game.getTheSeriesWithSmallestDifference(playerCard).getPosition() == (choosenSeries.getPosition()))
                             {
-                                display.printText("This series is full so you need to retrieve the card of this series. Therefore, your card becomes the first card of the serie");
-                                Series newSeries = Series.newSeries(choosenSeries.getPosition(), playerCard);
-                                seriesListInTable.set(index, newSeries); //a modifier car ici utilise direct index tout dépend ce qui retourne
-                                game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
-                                Player player = getPlayerFromChoosenCard.get(number);
-                                List<Card> pack = player.getPack().getCards();
-                                pack.addAll(choosenSeries.getCardsInTable());
-                                player.setPack(new RetrievedPack(pack));
-                                isPossible = true; // sortir de la boucle while
+                                if (choosenSeries.getNbOfCard() == 5)
+                                {
+                                    display.printText("This series is full so you need to retrieve the card of this series. Therefore, your card becomes the first card of the serie");
+                                    Series newSeries = Series.newSeries(choosenSeries.getPosition(), playerCard);
+                                    seriesListInTable.set(index, newSeries); //a modifier car ici utilise direct index tout dépend ce qui retourne
+                                    game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
+                                    Player player = getPlayerFromChoosenCard.get(number);
+                                    List<Card> pack = player.getPack().getCards();
+                                    pack.addAll(choosenSeries.getCardsInTable());
+                                    player.setPack(new RetrievedPack(pack));
+                                    isPossible = true; // sortir de la boucle while
+                                }
+                                else
+                                {
+                                    game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
+                                    game.addInSeries(choosenSeries, playerCard);
+//                                game.addPack(getPlayerFromChoosenCard.get(number), choosenSeries.getCardsInTable());
+                                    display.printText("You choose the series " + choosenSeries.getPosition() + " for the card " + playerCard.toString());
+                                    isPossible = true;
+                                }
                             }
                             else
-                            {
-                                game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
-                                game.addInSeries(choosenSeries, playerCard);
-//                                game.addPack(getPlayerFromChoosenCard.get(number), choosenSeries.getCardsInTable());
-                                display.printText("You choose the series " + choosenSeries.getPosition() + " for the card " + playerCard.toString());
-                                isPossible = true;
-                            }
+                                display.printTextInRed("You can't choose this series because the difference with the last is not the smallest ");
+                        }
+                        else if (game.isCardTooWeak(playerCard))
+                        {
+                            //carte trop faible
+                            //choisi le paquet qu'il souhaite recuperer
+                            display.printTextInRed("Your card is too weak, please choose the series you want to take");
+                            int i = scanner.getInteger(); // methode verifie
+                            Series takenSeries = seriesListInTable.get(i-1); //choisi serie 1
+                            seriesListInTable.set(i-1, Series.newSeries(takenSeries.getPosition(), playerCard)); //nouvelle serie 1 avec la carte joueur
+                            game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
+                            Player player = getPlayerFromChoosenCard.get(number);
+                            List<Card> pack = player.getPack().getCards();
+                            pack.addAll(takenSeries.getCardsInTable());
+                            player.setPack(new RetrievedPack(pack));
+//                        game.addPack(getPlayerFromChoosenCard.get(number), takenSeries.getCardsInTable());
+                            isPossible = true;
                         }
                         else
-                            display.printTextInRed("You can't choose this series because the difference with the last is not the smallest ");
+                            display.printTextInRed("You can't choose this series because your card is smaller than the last card of the series");
                     }
-                    else if (game.isCardTooWeak(playerCard))
-                    {
-                        //carte trop faible
-                        //choisi le paquet qu'il souhaite recuperer
-                        display.printTextInRed("Your card is too weak, please choose the series you want to take");
-                        int i = scanner.getInteger(); // methode verifie
-                        Series takenSeries = seriesListInTable.get(i-1); //choisi serie 1
-                        seriesListInTable.set(i-1, Series.newSeries(takenSeries.getPosition(), playerCard)); //nouvelle serie 1 avec la carte joueur
-                        game.removeCard(getPlayerFromChoosenCard.get(number), playerCard);
-                        Player player = getPlayerFromChoosenCard.get(number);
-                        List<Card> pack = player.getPack().getCards();
-                        pack.addAll(takenSeries.getCardsInTable());
-                        player.setPack(new RetrievedPack(pack));
-//                        game.addPack(getPlayerFromChoosenCard.get(number), takenSeries.getCardsInTable());
-                        isPossible = true;
-                    }
-                    else
-                        display.printTextInRed("You can't choose this series because your card is smaller than the last card of the series");
                 }
             }
-
         }
 
         List<Integer> pointList = new ArrayList<>();
