@@ -1,5 +1,6 @@
 package com.example._6quiprend;
 
+import com.isep._6quiprend.core.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
 
     Stage stage;
+    Game game;
     @Override
     public void start(Stage stage) throws IOException {
         this.stage=stage;

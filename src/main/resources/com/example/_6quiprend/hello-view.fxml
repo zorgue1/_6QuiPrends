@@ -23,7 +23,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="multiPlay" layoutX="166.0" layoutY="597.0" mnemonicParsing="false" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Multi Player">
+      <Button fx:id="multiPlay" layoutX="166.0" layoutY="597.0" mnemonicParsing="false" onAction="#multiPlay" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Multi Player">
          <font>
             <Font size="25.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font size="58.0" />
          </font>
       </Button>
-      <Button fx:id="play1" layoutX="785.0" layoutY="526.0" mnemonicParsing="false" onAction="#play" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="RULES">
+      <Button fx:id="rules" layoutX="785.0" layoutY="526.0" mnemonicParsing="false" onAction="#rules" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="RULES">
          <font>
             <Font size="58.0" />
          </font>

@@ -8,27 +8,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.MultiController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="488.0" layoutY="499.0" mnemonicParsing="false" text="SUIVANT !">
-         <font>
-            <Font size="31.0" />
-         </font>
-      </Button>
-      <TextField layoutX="419.0" layoutY="356.0">
+      <TextField fx:id="nbJoueur" layoutX="456.0" layoutY="356.0">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
+      <Label fx:id="afficheJoueur" layoutX="317.0" layoutY="449.0" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: black;" textFill="#e507b5" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
       <Label layoutX="304.0" layoutY="249.0" style="-fx-background-color: black;" text="Combien de joueur ? (2 à 10)" textFill="#e507b5">
          <font>
             <Font size="49.0" />
          </font>
       </Label>
+      <Button fx:id="suivant" disable="true" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="ok" layoutX="393.0" layoutY="525.0" mnemonicParsing="false" onAction="#nbjoueur" prefHeight="63.0" prefWidth="182.0" text="OK !">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
