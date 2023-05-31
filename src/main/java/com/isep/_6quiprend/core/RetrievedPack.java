@@ -9,12 +9,6 @@ public class RetrievedPack extends Deck{
         super(cards);
     }
 
-
-
-//    public List<Card> getCardsInPack() {
-//        return cards;
-//    }
-
     @Override
     public String toString() {
         return this.getCards().toString();

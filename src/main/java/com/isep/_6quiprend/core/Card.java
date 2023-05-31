@@ -19,17 +19,10 @@ public class Card {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public int getBeefHead() {
         return beefHead;
     }
 
-    public void setBeefHead(int number) {
-        this.beefHead = beefHead ;
-    }
 
     public int getCardBeefHead() {
         if (this.number == 55) {

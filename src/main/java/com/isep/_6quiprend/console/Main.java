@@ -14,11 +14,6 @@ public class Main {
     List<Player> players;
     List<Series> seriesListInTable;
 
-
-    Card aiCard;
-    Series aiSeries;
-
-    Boolean aiCardTooWeak = Boolean.FALSE;
     public Main(InputStream is) {
         this.game = new Game();
         this.display = new Display();

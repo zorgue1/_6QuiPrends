@@ -16,21 +16,18 @@ public class Display {
                 Math.max(series.get(2).getNbOfCard(), series.get(3).getNbOfCard())
         );
 
-        // Affichage de l'en-tête avec les indices des séries
         System.out.print("            ");
         for (int i = 0; i < series.size(); i++) {
             System.out.printf("Series %d\t\t", i + 1);
         }
         System.out.println();
 
-        // Affichage des barres horizontales
         System.out.print("            ");
         for (int i = 0; i < series.size(); i++) {
             System.out.print("---------------\t");
         }
         System.out.println();
 
-        // Affichage des listes côte à côte
         for (int i = 0; i < maxSize; i++) {
             for (int j = 0; j < series.size(); j++) {
                 List<Card> cards = series.get(j).getCardsInTable();

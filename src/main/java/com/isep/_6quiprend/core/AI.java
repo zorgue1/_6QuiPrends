@@ -44,26 +44,6 @@ public class AI extends Player{
         return this.getDeck().getCards().get(index);
     }
 
-//    public Card getCardFromHashMap(LinkedHashMap<Card, Series> hashMap, int index){
-//        int currentIndex = 0;
-//        Card card1 = null;
-//        for (Card card : hashMap.keySet()) {
-//            if (currentIndex == index) {
-//                card1 = card;
-//                break; // Sortir de la boucle une fois l'entrée trouvée
-//            }
-//            currentIndex++;
-//        }
-//        return card1;
-//    }
-
-//    public Card getCardTooWeak(){
-//        Random rd = new Random();
-//        int index = rd.nextInt(this.getDeck().getCards().size());
-//        Card card = this.getDeck().getCards().get(index);
-//        return card;
-//    }
-
     public Series getSeriesToRetrieve(List<Series> seriesList){
         List<Integer> pointList = new ArrayList<>();
         for (Series series : seriesList)

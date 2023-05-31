@@ -18,10 +18,6 @@ public class Deck {
         return cards;
     }
 
-    public void setDeck(List<Card> deck) {
-        this.cards = cards;
-    }
-
     public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
         for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
