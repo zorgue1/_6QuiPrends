@@ -45,8 +45,8 @@ public class Deck {
         return total;
     }
 
-    public boolean hasCardWithNumber(int number, Deck deck) {
-        for (Card card : deck.getCards()) {
+    public boolean hasCardWithNumber(int number) {
+        for (Card card : this.getCards()) {
             if (card.getNumber() == number) {
                 return true;
             }

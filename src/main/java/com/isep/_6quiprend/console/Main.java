@@ -11,6 +11,9 @@ public class Main {
     Display display;
     Scanner scanner;
 
+    List<Player> players;
+    List<Series> seriesListInTable;
+
 
     Card aiCard;
     Series aiSeries;
@@ -29,72 +32,30 @@ public class Main {
 
     private void play() {
         List<Card> allCard = game.getAllCard();
-        List<Player> players = game.getPlayers();
-        List<Series> seriesListInTable = game.getSeriesListInTable();
+        players = game.getPlayers();
+        seriesListInTable = game.getSeriesListInTable();
         Collections.shuffle(allCard);
 
-        display.printText("Number of players?");
-        int nbOfPlayers = scanner.getIntegerInRange(1, 10);
+        int nbOfPlayers = getNumberOfPlayers();
+        boolean playWithAI = getPlayWithAI();
 
-        String answer = scanner.getTextWithPrompt("Do you want to play with an AI?");
-
-
-        if (answer.equalsIgnoreCase("Yes")) {
-            Deck deck = game.getPlayerDeck();
-            List<Card> retrievedCards = new ArrayList<>();
-            RetrievedPack pack = new RetrievedPack(retrievedCards);
-            players.add(new AI("AI", deck, pack));
+        if (playWithAI) {
+            game.addAIPlayer();
             display.printText("You decided to add an AI.");
         }
 
-        for (int i = 1; i <= nbOfPlayers; i++) {
-            display.printText("Name of player " + i);
-            String name = scanner.getText();
-            Deck deck = game.getPlayerDeck();
-            List<Card> retrievedCards = new ArrayList<>();
-            RetrievedPack pack = new RetrievedPack(retrievedCards);
-            players.add(new Player(name, deck, pack));
-        }
+        addHumanPlayers(nbOfPlayers);
 
         display.printText("Here is the list of players: " + players.toString());
 
-        for (int i = 1; i <= 4; i++) {
-            game.initSeries(i);
-        }
+        game.initSeriesOnTable();
 
         while (!game.areAllDecksEmpty(players)) {
             display.printText("Here are the series on the table:");
             display.displayAllSeries(seriesListInTable);
 
-            List<Integer> chosenNumberList = new ArrayList<>();
-            HashMap<Integer, Player> getPlayerFromChosenCard = new HashMap<>();
-
-            for (Player player : players) {
-                display.printTextInBlue("It's " + player.getName() + "'s turn");
-
-                if (player instanceof AI) {
-                    AI ai = (AI) player;
-                    aiCard = ai.getCard(seriesListInTable);
-
-                    if (aiCard != null) {
-                        System.out.println("AI chose the card " + aiCard.toString());
-                    } else {
-                        aiCard = ai.getCardTooWeak();
-                        System.out.println("AI chose the card too weak " + aiCard.toString());
-                    }
-
-                    int numberOfCard = aiCard.getNumber();
-                    chosenNumberList.add(numberOfCard);
-                    getPlayerFromChosenCard.put(numberOfCard, player);
-                    display.printText("AI has finished choosing.");
-                } else {
-                    display.printText("Which card do you want to play?");
-                    display.printText("Your deck: " + player.getDeck().toString());
-                    int number = scanner.getCardNumberInput(player.getDeck());
-                    chosenNumberList.add(number);
-                    getPlayerFromChosenCard.put(number, player);
-                }
-            }
+            List<Integer> chosenNumberList = getPlayerCardSelection();
+            HashMap<Integer, Player> getPlayerFromChosenCard = game.mapPlayersToChosenCards(chosenNumberList);
 
             Collections.sort(chosenNumberList);
 
@@ -106,34 +67,25 @@ public class Main {
 
                 if (currentPlayer instanceof AI) {
                     AI aiPlayer = (AI) currentPlayer;
-                    if (game.getTheSeriesWithSmallestDifference(playerCard) == null)
-                        aiCardTooWeak = Boolean.TRUE;
-                    else
-                        aiCardTooWeak = Boolean.FALSE;
+                    boolean aiCardTooWeak = false;
+
+                    if (game.getTheSeriesWithSmallestDifference(playerCard) == null) {
+                        aiCardTooWeak = true;
+                    }
 
                     if (!aiCardTooWeak) {
-                        aiSeries = game.getTheSeriesWithSmallestDifference(playerCard);
+                        Series aiSeries = game.getTheSeriesWithSmallestDifference(playerCard);
 
                         if (aiSeries.getNbOfCard() == 5) {
-                            Series newSeries = Series.newSeries(aiSeries.getPosition(), playerCard);
-                            seriesListInTable.set(aiSeries.getPosition() - 1, newSeries);
-                            aiPlayer.removeCard(playerCard);
-                            List<Card> pack = currentPlayer.getPack().getCards();
-                            pack.addAll(aiSeries.getCardsInTable());
-                            currentPlayer.setPack(new RetrievedPack(pack));
+                            game.processForFullSeries(aiPlayer, aiSeries,playerCard);
                             display.printText("This series is full, so AI has retrieved the series " + aiSeries.getPosition() + ". The AI's card becomes the first card of the series.");
                         } else {
-                            game.addInSeries(aiSeries, playerCard);
-                            aiPlayer.removeCard(playerCard);
+                            game.normalProcess(aiPlayer, aiSeries, playerCard);
                             display.printText("AI chose series " + aiSeries.getPosition() + " for the card " + playerCard.toString());
                         }
                     } else {
                         Series aiSeries = aiPlayer.getSeriesToRetrieve(seriesListInTable);
-                        seriesListInTable.set(aiSeries.getPosition() - 1, Series.newSeries(aiSeries.getPosition(), playerCard));
-                        aiPlayer.removeCard(playerCard);
-                        List<Card> pack = currentPlayer.getPack().getCards();
-                        pack.addAll(aiSeries.getCardsInTable());
-                        currentPlayer.setPack(new RetrievedPack(pack));
+                        game.processForCardTooWeak(aiSeries.getPosition(), aiPlayer, playerCard);
                         display.printTextInRed("AI's card is too weak. It retrieved series " + aiSeries.getPosition() + ".");
                     }
                 } else {
@@ -149,16 +101,10 @@ public class Main {
                             if (game.getTheSeriesWithSmallestDifference(playerCard).getPosition() == chosenSeries.getPosition()) {
                                 if (chosenSeries.getNbOfCard() == 5) {
                                     display.printText("This series is full, so you need to retrieve the cards of this series. Therefore, your card becomes the first card of the series.");
-                                    Series newSeries = Series.newSeries(chosenSeries.getPosition(), playerCard);
-                                    seriesListInTable.set(index - 1, newSeries);
-                                    currentPlayer.removeCard(playerCard);
-                                    List<Card> pack = currentPlayer.getPack().getCards();
-                                    pack.addAll(chosenSeries.getCardsInTable());
-                                    currentPlayer.setPack(new RetrievedPack(pack));
+                                    game.processForFullSeries(currentPlayer, chosenSeries, playerCard);
                                     isPossible = true;
                                 } else {
-                                    game.addInSeries(chosenSeries, playerCard);
-                                    currentPlayer.removeCard(playerCard);
+                                    game.normalProcess(currentPlayer, chosenSeries, playerCard);
                                     display.printText("You chose series " + chosenSeries.getPosition() + " for the card " + playerCard.toString());
                                     isPossible = true;
                                 }
@@ -168,12 +114,7 @@ public class Main {
                         } else if (game.isCardTooWeak(playerCard)) {
                             display.printTextInRed("Your card is too weak, please choose the series you want to take.");
                             int i = scanner.getIntegerInRange(1, seriesListInTable.size());
-                            Series takenSeries = seriesListInTable.get(i - 1);
-                            seriesListInTable.set(i - 1, Series.newSeries(takenSeries.getPosition(), playerCard));
-                            currentPlayer.removeCard(playerCard);
-                            List<Card> pack = currentPlayer.getPack().getCards();
-                            pack.addAll(takenSeries.getCardsInTable());
-                            currentPlayer.setPack(new RetrievedPack(pack));
+                            game.processForCardTooWeak(i, currentPlayer, playerCard);
                             isPossible = true;
                         } else {
                             display.printTextInRed("You can't choose this series because your card is smaller than the last card of the series.");
@@ -183,22 +124,69 @@ public class Main {
             }
         }
 
-        List<Integer> pointList = new ArrayList<>();
-        HashMap<Integer, List<Player>> getPlayerByPoint = new HashMap<>();
-
-        for (Player player : players) {
-            int point = player.getPack().getTotalBeefHead();
-            pointList.add(point);
-            List<Player> playersWithSamePoint = getPlayerByPoint.getOrDefault(point, new ArrayList<>());
-            playersWithSamePoint.add(player);
-            getPlayerByPoint.put(point, playersWithSamePoint);
-        }
-
-        int minPoint = Collections.min(pointList);
-        List<Player> winners = getPlayerByPoint.get(minPoint);
-
+        List<Player> winners = game.determineWinner();
         display.printImportantInfo("The winner(s) with the lowest points: " + winners.toString());
     }
+
+    private int getNumberOfPlayers() {
+        display.printText("Number of players?");
+        return scanner.getIntegerInRange(1, 10);
+    }
+
+    private boolean getPlayWithAI() {
+        String answer = scanner.getTextWithPrompt("Do you want to play with an AI?");
+        return answer.equalsIgnoreCase("Yes");
+    }
+
+
+
+    private void addHumanPlayers(int numberOfPlayers) {
+        for (int i = 1; i <= numberOfPlayers; i++) {
+            display.printText("Name of player " + i);
+            String name = scanner.getText();
+            Deck deck = game.getPlayerDeck();
+            List<Card> retrievedCards = new ArrayList<>();
+            RetrievedPack pack = new RetrievedPack(retrievedCards);
+            players.add(new Player(name, deck, pack));
+        }
+    }
+
+
+
+    private List<Integer> getPlayerCardSelection() {
+        List<Integer> chosenNumberList = new ArrayList<>();
+
+        for (Player player : players) {
+            display.printTextInBlue("It's " + player.getName() + "'s turn");
+
+            if (player instanceof AI) {
+                AI ai = (AI) player;
+                Card aiCard = ai.getCard(seriesListInTable);
+
+                if (aiCard != null) {
+                    System.out.println("AI chose the card " + aiCard.toString());
+                } else {
+                    aiCard = ai.getCardTooWeak();
+                    System.out.println("AI chose the card too weak " + aiCard.toString());
+                }
+
+                int numberOfCard = aiCard.getNumber();
+                chosenNumberList.add(numberOfCard);
+                display.printText("AI has finished choosing.");
+            } else {
+                display.printText("Which card do you want to play?");
+                display.printText("Your deck: " + player.getDeck().toString());
+                int number = scanner.getCardNumberInput(player.getDeck());
+                chosenNumberList.add(number);
+            }
+        }
+
+        return chosenNumberList;
+    }
+
+
+
+
 
 
 }

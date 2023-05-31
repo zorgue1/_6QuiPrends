@@ -63,7 +63,7 @@ public class Scanner {
     }
 
     private boolean isValidCardNumberInput(int number, Deck deck) {
-        return deck.hasCardWithNumber(number, deck);
+        return deck.hasCardWithNumber(number);
     }
 
     public int getCardNumberInput(Deck deck) {

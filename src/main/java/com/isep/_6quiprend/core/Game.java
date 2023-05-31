@@ -104,6 +104,75 @@ public class Game {
         this.seriesListInTable.add(series);
     }
 
+    public void addAIPlayer() {
+        Deck deck = getPlayerDeck();
+        List<Card> retrievedCards = new ArrayList<>();
+        RetrievedPack pack = new RetrievedPack(retrievedCards);
+        players.add(new AI("AI", deck, pack));
+    }
+
+    public void processForCardTooWeak(int seriesIndex, Player currentPlayer, Card playerCard){
+        Series takenSeries = seriesListInTable.get(seriesIndex - 1);
+        seriesListInTable.set(seriesIndex - 1, Series.newSeries(takenSeries.getPosition(), playerCard));
+        currentPlayer.removeCard(playerCard);
+        List<Card> pack = currentPlayer.getPack().getCards();
+        pack.addAll(takenSeries.getCardsInTable());
+        currentPlayer.setPack(new RetrievedPack(pack));
+    }
+
+    public void normalProcess(Player currentPlayer, Series chosenSeries, Card playerCard){
+        addInSeries(chosenSeries, playerCard);
+        currentPlayer.removeCard(playerCard);
+    }
+
+    public void processForFullSeries(Player currentPlayer, Series chosenSeries, Card playerCard){
+        Series newSeries = Series.newSeries(chosenSeries.getPosition(), playerCard);
+        seriesListInTable.set(chosenSeries.getPosition() - 1, newSeries);
+        currentPlayer.removeCard(playerCard);
+        List<Card> pack = currentPlayer.getPack().getCards();
+        pack.addAll(chosenSeries.getCardsInTable());
+        currentPlayer.setPack(new RetrievedPack(pack));
+    }
+
+    public List<Player> determineWinner() {
+        List<Integer> pointList = new ArrayList<>();
+        HashMap<Integer, List<Player>> getPlayerByPoint = new HashMap<>();
+
+        for (Player player : players) {
+            int point = player.getPack().getTotalBeefHead();
+            pointList.add(point);
+            List<Player> playersWithSamePoint = getPlayerByPoint.getOrDefault(point, new ArrayList<>());
+            playersWithSamePoint.add(player);
+            getPlayerByPoint.put(point, playersWithSamePoint);
+        }
+
+        int minPoint = Collections.min(pointList);
+        List<Player> winners = getPlayerByPoint.get(minPoint);
+
+        return winners;
+    }
+
+    public HashMap<Integer, Player> mapPlayersToChosenCards(List<Integer> chosenNumberList) {
+        HashMap<Integer, Player> getPlayerFromChosenCard = new HashMap<>();
+
+        for (Player player : players) {
+            for (int number : chosenNumberList) {
+                if (player.getDeck().hasCardWithNumber(number)) {
+                    getPlayerFromChosenCard.put(number, player);
+                    break;
+                }
+            }
+        }
+
+        return getPlayerFromChosenCard;
+    }
+
+    public void initSeriesOnTable() {
+        for (int i = 1; i <= 4; i++) {
+            initSeries(i);
+        }
+    }
+
     public static void rules(){
         String rules = "Nombre de joueurs : 2 à 10 joueurs\n" +
                 "Principe : Les cartes ont deux valeurs :\n" +
