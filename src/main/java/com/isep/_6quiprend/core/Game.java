@@ -24,9 +24,7 @@ public class Game {
     public List<Card> getAllCard(){
         return this.allCard;
     }
-    public void addPack(Player player, List<Card> cards){
-        player.setPack(new RetrievedPack(cards));
-    }
+
     public boolean areAllDecksEmpty(List<Player> players)
     {
         List<Boolean> stateList = new ArrayList<>();
@@ -40,11 +38,7 @@ public class Game {
         else
             return false;
     }
-//    public void removeCard(Player player, Card card){
-//        List<Card> cards = player.getDeck().getCards();
-//        cards.remove(card);
-//        player.setDeck(new Deck(cards));
-//    }
+
     public void addInSeries(Series series, Card card){
         List<Card> cards = series.getCardsInTable();
         cards.add(card);
@@ -171,6 +165,10 @@ public class Game {
         for (int i = 1; i <= 4; i++) {
             initSeries(i);
         }
+    }
+
+    public void shuffleCards(){
+        Collections.shuffle(allCard);
     }
 
     public static void rules(){

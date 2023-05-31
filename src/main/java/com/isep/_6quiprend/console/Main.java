@@ -31,10 +31,11 @@ public class Main {
     }
 
     private void play() {
-        List<Card> allCard = game.getAllCard();
+//        List<Card> allCard = game.getAllCard();
         players = game.getPlayers();
         seriesListInTable = game.getSeriesListInTable();
-        Collections.shuffle(allCard);
+
+        game.shuffleCards();
 
         int nbOfPlayers = getNumberOfPlayers();
         boolean playWithAI = getPlayWithAI();
