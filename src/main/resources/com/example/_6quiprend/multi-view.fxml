@@ -15,30 +15,39 @@
             <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="nbJoueur" layoutX="456.0" layoutY="356.0">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </TextField>
       <Label fx:id="afficheJoueur" layoutX="317.0" layoutY="449.0" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: black;" textFill="#e507b5" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="304.0" layoutY="249.0" style="-fx-background-color: black;" text="Combien de joueur ? (2 à 10)" textFill="#e507b5">
+      <Label fx:id="texte" layoutX="304.0" layoutY="249.0" style="-fx-background-color: black;" textFill="#e507b5">
          <font>
             <Font size="49.0" />
          </font>
       </Label>
-      <Button fx:id="suivant" disable="true" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
+      <Button fx:id="suivant" disable="true" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" onAction="#suivant" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
+      <Button fx:id="back" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: BLACK;" text="RETURN" textFill="#af00c4">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
       <Button fx:id="ok" layoutX="393.0" layoutY="525.0" mnemonicParsing="false" onAction="#nbjoueur" prefHeight="63.0" prefWidth="182.0" text="OK !">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
+      <TextField fx:id="nomJoueur" editable="false" layoutX="456.0" layoutY="356.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="nbJoueur" layoutX="456.0" layoutY="356.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

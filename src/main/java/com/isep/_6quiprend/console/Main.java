@@ -11,6 +11,7 @@ public class Main {
     Display display;
     Scanner scanner;
 
+
     Card aiCard;
     Series aiSeries;
 
