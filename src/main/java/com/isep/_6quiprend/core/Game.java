@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Game {
 
-    private static int NBOFCARDBYDECK = 3;
+    private static int NBOFCARDBYDECK = 1;
     private List<Series> seriesListInTable = new ArrayList<>();
     private final List<Player> players;
 
@@ -27,7 +27,7 @@ public class Game {
     public void addPack(Player player, List<Card> cards){
         player.setPack(new RetrievedPack(cards));
     }
-    public boolean areAllDeckEmpty(List<Player> players)
+    public boolean areAllDecksEmpty(List<Player> players)
     {
         List<Boolean> stateList = new ArrayList<>();
         for (Player player : players)
@@ -40,11 +40,11 @@ public class Game {
         else
             return false;
     }
-    public void removeCard(Player player, Card card){
-        List<Card> cards = player.getDeck().getCards();
-        cards.remove(card);
-        player.setDeck(new Deck(cards));
-    }
+//    public void removeCard(Player player, Card card){
+//        List<Card> cards = player.getDeck().getCards();
+//        cards.remove(card);
+//        player.setDeck(new Deck(cards));
+//    }
     public void addInSeries(Series series, Card card){
         List<Card> cards = series.getCardsInTable();
         cards.add(card);
@@ -72,11 +72,16 @@ public class Game {
             if (difference > 0)
                 positiveList.add(difference);
         }
-        int min = Collections.min(positiveList);
 
-        int index = diffList.indexOf(min);
-        return this.seriesListInTable.get(index);
+        if (positiveList.size() > 0)
+        {
+            int min = Collections.min(positiveList);
 
+            int index = diffList.indexOf(min);
+            return this.seriesListInTable.get(index);
+        }
+        else
+            return null;
     }
 
 

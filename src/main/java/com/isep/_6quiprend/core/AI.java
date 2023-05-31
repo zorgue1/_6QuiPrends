@@ -8,9 +8,8 @@ public class AI extends Player{
         super(name, deck, pack);
     }
 
-    public LinkedHashMap<Card, Series> chooseCard(List<Series> seriesList) {
-        HashMap<Card, List<Series>> hashMap = new HashMap<>();
-        LinkedHashMap<Card, Series> hashMap1 = new LinkedHashMap<>();
+    public Card getCard(List<Series> seriesList) {
+       List<Card> cardList = new ArrayList<>();
 
         for (Card card : this.getDeck().getCards()) {
             List<Series> possibleSeries = new ArrayList<>();
@@ -20,48 +19,50 @@ public class AI extends Player{
                 }
             }
             if (!possibleSeries.isEmpty()) {
-                hashMap.put(card, possibleSeries);
+                cardList.add(card);
             }
         }
 
-        System.out.println("HashMap1 " + hashMap);
-
-        for (Card possibleCard : hashMap.keySet()) {
-            List<Integer> diffList = new ArrayList<>();
-            List<Series> possibleSeriesList = hashMap.get(possibleCard);
-            for (Series series : possibleSeriesList) {
-                diffList.add(series.getDifferenceBetweenLastAndNew(possibleCard));
-            }
-            int min = Collections.min(diffList);
-            int index = diffList.indexOf(min);
-            Series choice = possibleSeriesList.get(index);
-            hashMap1.put(possibleCard, choice);
+        if (cardList.size() > 0)
+        {
+            Random rd = new Random();
+            int index = rd.nextInt(cardList.size());
+            return cardList.get(index);
         }
-
-        System.out.println("Hashmap2 " + hashMap1);
-        return hashMap1;
+        return null;
     }
 
-
-    public Card getCardFromHashMap(LinkedHashMap<Card, Series> hashMap, int index){
-        int currentIndex = 0;
-        Card card1 = null;
-        for (Card card : hashMap.keySet()) {
-            if (currentIndex == index) {
-                card1 = card;
-                break; // Sortir de la boucle une fois l'entrée trouvée
-            }
-            currentIndex++;
-        }
-        return card1;
-    }
 
     public Card getCardTooWeak(){
-        Random rd = new Random();
-        int index = rd.nextInt(this.getDeck().getCards().size());
-        Card card = this.getDeck().getCards().get(index);
-        return card;
+        List<Integer> numberList = new ArrayList<>();
+        for (Card card : this.getDeck().getCards())
+        {
+            numberList.add(card.getNumber());
+        }
+        int min = Collections.min(numberList);
+        int index = numberList.indexOf(min);
+        return this.getDeck().getCards().get(index);
     }
+
+//    public Card getCardFromHashMap(LinkedHashMap<Card, Series> hashMap, int index){
+//        int currentIndex = 0;
+//        Card card1 = null;
+//        for (Card card : hashMap.keySet()) {
+//            if (currentIndex == index) {
+//                card1 = card;
+//                break; // Sortir de la boucle une fois l'entrée trouvée
+//            }
+//            currentIndex++;
+//        }
+//        return card1;
+//    }
+
+//    public Card getCardTooWeak(){
+//        Random rd = new Random();
+//        int index = rd.nextInt(this.getDeck().getCards().size());
+//        Card card = this.getDeck().getCards().get(index);
+//        return card;
+//    }
 
     public Series getSeriesToRetrieve(List<Series> seriesList){
         List<Integer> pointList = new ArrayList<>();

@@ -1,5 +1,7 @@
 package com.isep._6quiprend.core;
 
+import java.util.List;
+
 public class Player {
 
     private Deck deck;
@@ -38,4 +40,12 @@ public class Player {
     public String toString() {
         return this.getName();
     }
+
+    public void removeCard(Card card){
+        List<Card> cards = this.getDeck().getCards();
+        cards.remove(card);
+        setDeck(new Deck(cards));
+    }
+
+
 }
