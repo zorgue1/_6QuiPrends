@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.PlateauController">
+   <children>
+      <ImageView fitHeight="773.0" fitWidth="1164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/tapis.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

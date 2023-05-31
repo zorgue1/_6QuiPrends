@@ -25,11 +25,6 @@
             <Font size="49.0" />
          </font>
       </Label>
-      <Button fx:id="suivant" disable="true" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" onAction="#suivant" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
       <Button fx:id="back" layoutX="43.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: BLACK;" text="RETURN" textFill="#af00c4">
          <font>
             <Font size="18.0" />
@@ -49,5 +44,15 @@
             <Font size="26.0" />
          </font>
       </TextField>
+      <Button fx:id="suivant2" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" onAction="#suivant2" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="suivant" disable="true" layoutX="687.0" layoutY="525.0" mnemonicParsing="false" onAction="#suivant" prefHeight="63.0" prefWidth="182.0" text="SUIVANT !">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
