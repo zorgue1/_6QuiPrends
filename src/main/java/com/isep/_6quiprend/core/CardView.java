@@ -15,7 +15,7 @@ public class CardView {
     protected ImageView frontImageView;
     protected ImageView backImageView;
 
-    /** may be null if unknown.. forced to back side */
+    @Getter
     protected Card card;
 
     protected boolean frontSide;
@@ -46,6 +46,7 @@ public class CardView {
 
     public void toggleCard() {
         this.frontSide = !frontSide;
+        System.out.println("toggle card " + card + " => " + ((frontSide)? "front" : "back"));
         if (frontSide) {
             frontImageView.setVisible(true);
             backImageView.setVisible(false);
@@ -53,6 +54,7 @@ public class CardView {
             frontImageView.setVisible(false);
             backImageView.setVisible(true);
         }
+
     }
 
     //---------------------------------------------------------------------------------------------

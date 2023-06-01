@@ -57,7 +57,7 @@ public class SeriesView {
 
             nodeSetLayoutAt(cardComponent, cardPosForRowCol(row, col));
 
-//            cardComponent.setOnMouseClicked(e -> onMouseClickCard(e, cardView));
+            cardComponent.setOnMouseClicked(e -> onMouseClickCard(e, cardView));
 
             centerArea.getChildren().add(cardComponent);
             row++;
@@ -70,36 +70,36 @@ public class SeriesView {
         component.setBottom(buttonToolbars);
     }
 
-//    private void onMouseClickCard(MouseEvent e, CardView cardView) {
-//        if (e.isSecondaryButtonDown() || e.isShiftDown() || e.isControlDown()) {
-//            // TODO ... animate move card to end..
-//            System.out.println("onMouseClickCard..RightButton => move card " + cardView + " to end");
-//
-//            Pane cardComponent = cardView.getComponent();
-//            Point2D fromPt = new Point2D(cardComponent.getLayoutX(), cardComponent.getLayoutY());
-//
-//            Point2D toPt = cardPosForRowCol(currEndRow, currEndCol);
-//            currEndCol++;
-//            nodeSetLayoutAt(endLabel, cardPosForRowCol(currEndRow, currEndCol));
-//
-//            // remove then add cardView, so that it is on top of all others
-//            centerArea.getChildren().remove(cardComponent);
-//            centerArea.getChildren().add(cardComponent);
-//
-//            // animate move card to end
-//            Point2D translate = toPt.subtract(fromPt);
-//            TranslateTransition translateTransition = new TranslateTransition();
-//            translateTransition.setNode(cardComponent);
-//            translateTransition.setDuration(Duration.millis(500));
-//            translateTransition.setToX(translate.getX());
-//            translateTransition.setToY(translate.getY());
-//            translateTransition.play();
-//
-//        } else {
-//            System.out.println("onMouseClickCard => toggle card " + cardView);
-//            cardView.toggleCard();
-//        }
-//    }
+    private void onMouseClickCard(MouseEvent e, CardView cardView) {
+        if (e.isSecondaryButtonDown() || e.isShiftDown() || e.isControlDown()) {
+            // TODO ... animate move card to end..
+            System.out.println("onMouseClickCard..RightButton => move card " + cardView + " to end");
+
+            Pane cardComponent = cardView.getComponent();
+            Point2D fromPt = new Point2D(cardComponent.getLayoutX(), cardComponent.getLayoutY());
+
+            Point2D toPt = cardPosForRowCol(currEndRow, currEndCol);
+            currEndCol++;
+            nodeSetLayoutAt(endLabel, cardPosForRowCol(currEndRow, currEndCol));
+
+            // remove then add cardView, so that it is on top of all others
+            centerArea.getChildren().remove(cardComponent);
+            centerArea.getChildren().add(cardComponent);
+
+            // animate move card to end
+            Point2D translate = toPt.subtract(fromPt);
+            TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setNode(cardComponent);
+            translateTransition.setDuration(Duration.millis(500));
+            translateTransition.setToX(translate.getX());
+            translateTransition.setToY(translate.getY());
+            translateTransition.play();
+
+        } else {
+            System.out.println("onMouseClickCard => toggle card " + cardView);
+            cardView.toggleCard();
+        }
+    }
 
     protected static void nodeSetLayoutAt(Node node, Point2D pt) {
         node.setLayoutX(pt.getX());

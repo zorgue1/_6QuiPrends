@@ -26,6 +26,7 @@ public class PlayerView {
     int cardHeight = 115;
 
     Insets cardInsets = new Insets(2);
+    public static Card selectedCard;
 
     int currEndRow = 7;
     int currEndCol = 4;
@@ -44,8 +45,6 @@ public class PlayerView {
 
         List<Card> cards = player.getDeck().getCards();
 
-//        int row = 5;
-//        int col = 3;
         for(Card card: cards) {
 
             CardView cardView = new CardView(card, cardWidth, cardHeight);
@@ -54,9 +53,12 @@ public class PlayerView {
 
             nodeSetLayoutAt(cardComponent, cardPosForRowCol(row, col));
 
-
+            if (isVisible)
+                cardComponent.setOnMouseClicked(e -> onMouseClickCard(e, cardView));
+            else
+                cardView.getFrontImageView().setVisible(isVisible);
             centerArea.getChildren().add(cardComponent);
-            cardView.getFrontImageView().setVisible(isVisible);
+//            cardView.getFrontImageView().setVisible(isVisible);
             col++;
         }
 
@@ -68,34 +70,9 @@ public class PlayerView {
     }
 
     private void onMouseClickCard(MouseEvent e, CardView cardView) {
-        if (e.isSecondaryButtonDown() || e.isShiftDown() || e.isControlDown()) {
-            // TODO ... animate move card to end..
-            System.out.println("onMouseClickCard..RightButton => move card " + cardView + " to end");
-
-            Pane cardComponent = cardView.getComponent();
-            Point2D fromPt = new Point2D(cardComponent.getLayoutX(), cardComponent.getLayoutY());
-
-            Point2D toPt = cardPosForRowCol(currEndRow, currEndCol);
-            currEndCol++;
-            nodeSetLayoutAt(endLabel, cardPosForRowCol(currEndRow, currEndCol));
-
-            // remove then add cardView, so that it is on top of all others
-            centerArea.getChildren().remove(cardComponent);
-            centerArea.getChildren().add(cardComponent);
-
-            // animate move card to end
-            Point2D translate = toPt.subtract(fromPt);
-            TranslateTransition translateTransition = new TranslateTransition();
-            translateTransition.setNode(cardComponent);
-            translateTransition.setDuration(Duration.millis(500));
-            translateTransition.setToX(translate.getX());
-            translateTransition.setToY(translate.getY());
-            translateTransition.play();
-
-        } else {
-            System.out.println("onMouseClickCard => toggle card " + cardView);
-            cardView.toggleCard();
-        }
+        System.out.println("onMouseClickCard => toggle card " + cardView);
+        cardView.toggleCard();
+        selectedCard = cardView.getCard();
     }
 
     protected static void nodeSetLayoutAt(Node node, Point2D pt) {

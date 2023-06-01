@@ -14,10 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+
+import static com.example._6quiprend.PlayerView.selectedCard;
 
 public class AloneController {
 
@@ -86,36 +85,39 @@ public class AloneController {
         List<Card> retrievedCards = new ArrayList<>();
         RetrievedPack pack = new RetrievedPack(retrievedCards);
         Player player = new Player(playerName, deck, pack);
-        PlayerView playerView = new PlayerView(player, true, 5, 3);
         players.add(player);
 
         game.addAIPlayer();
         Player ai = players.get(1);
-        PlayerView aiView = new PlayerView(ai, false, 0, 3);
+        PlayerView aiView = new PlayerView(ai, false,0, 3);
+
+
+        PlayerView playerView = new PlayerView(player, true,5, 3);
 
 
 
         game.initSeriesOnTable();
 
-        while(!game.areAllDecksEmpty(players))
-        {
+//        while(!game.areAllDecksEmpty(players))
+//        {
             displayAllSeries();
 
+            displayPlayerView(aiView);
+            displayPlayerView(playerView);
 
-        }
+//        List<Integer> chosenNumberList = getPlayerCardSelection(event);
+//        HashMap<Integer, Player> getPlayerFromChosenCard = game.mapPlayersToChosenCards(chosenNumberList);
+//
+//        Collections.sort(chosenNumberList);
+//        System.out.println("choosenNumberList" + chosenNumberList);
 
 
-        AnchorPane.setTopAnchor(playerView.getComponent(), 0.0);
-        AnchorPane.setBottomAnchor(playerView.getComponent(), 0.0);
-        AnchorPane.setLeftAnchor(playerView.getComponent(), 0.0);
-        AnchorPane.setRightAnchor(playerView.getComponent(), 0.0);
-        mainAnchorPane.getChildren().add(playerView.getComponent());
+//        }
 
-        AnchorPane.setTopAnchor(aiView.getComponent(), 0.0);
-        AnchorPane.setBottomAnchor(aiView.getComponent(), 0.0);
-        AnchorPane.setLeftAnchor(aiView.getComponent(), 0.0);
-        AnchorPane.setRightAnchor(aiView.getComponent(), 0.0);
-        mainAnchorPane.getChildren().add(aiView.getComponent());
+
+
+
+
 
         Scene scene = new Scene(mainAnchorPane);
         primaryStage.setScene(scene);
@@ -124,6 +126,50 @@ public class AloneController {
     }
 
 
+//    private List<Integer> getPlayerCardSelection(ActionEvent event) {
+//        List<Integer> chosenNumberList = new ArrayList<>();
+//
+//        for (Player player : players) {
+//
+//            if (player instanceof AI) {
+//                AI ai = (AI) player;
+//                Card aiCard = ai.getCard(seriesListInTable);
+//
+//                if (aiCard != null) {
+//                    System.out.println("AI chose the card " + aiCard.toString());
+//                } else {
+//                    aiCard = ai.getCardTooWeak();
+//                    System.out.println("AI chose the card too weak " + aiCard.toString());
+//                }
+//
+//                int numberOfCard = aiCard.getNumber();
+//                chosenNumberList.add(numberOfCard);
+//                System.out.println("AI has finished choosing.");
+//            } else {
+//                System.out.println("Which card do you want to play?");
+//                int number = btnConfirm(event).getNumber();
+//                chosenNumberList.add(number);
+//            }
+//        }
+//
+//        return chosenNumberList;
+//    }
+//    public Card btnConfirm(ActionEvent e){
+//        if (selectedCard != null) {
+//            System.out.println("Selected card: " + selectedCard);
+//            return selectedCard;
+//        } else {
+//            System.out.println("Aucune carte sélectionnée");
+//            return null;
+//        }
+//    }
+    public void displayPlayerView(PlayerView playerView){
+        AnchorPane.setTopAnchor(playerView.getComponent(), 0.0);
+        AnchorPane.setBottomAnchor(playerView.getComponent(), 0.0);
+        AnchorPane.setLeftAnchor(playerView.getComponent(), 0.0);
+        AnchorPane.setRightAnchor(playerView.getComponent(), 0.0);
+        mainAnchorPane.getChildren().add(playerView.getComponent());
+    }
     public void displayAllSeries(){
         for (Series series : seriesListInTable)
         {
