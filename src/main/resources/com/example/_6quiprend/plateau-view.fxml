@@ -3,14 +3,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.PlateauController">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="400.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.PlateauController">
    <children>
       <ImageView fitHeight="773.0" fitWidth="1164.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
+      <BorderPane fx:id="mainBorderPane" layoutX="228.0" layoutY="445.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

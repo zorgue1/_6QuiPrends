@@ -102,7 +102,7 @@ public class Game {
         Deck deck = getPlayerDeck();
         List<Card> retrievedCards = new ArrayList<>();
         RetrievedPack pack = new RetrievedPack(retrievedCards);
-        players.add(new AI("AI", deck, pack));
+        this.players.add(new AI("AI", deck, pack));
     }
 
     public void processForCardTooWeak(int seriesIndex, Player currentPlayer, Card playerCard){

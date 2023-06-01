@@ -46,7 +46,6 @@ public class CardView {
 
     public void toggleCard() {
         this.frontSide = !frontSide;
-        System.out.println("toggle card " + card + " => " + ((frontSide)? "front" : "back"));
         if (frontSide) {
             frontImageView.setVisible(true);
             backImageView.setVisible(false);
@@ -58,6 +57,14 @@ public class CardView {
 
     //---------------------------------------------------------------------------------------------
 
+
+    public ImageView getFrontImageView() {
+        return frontImageView;
+    }
+
+    public ImageView getBackImageView() {
+        return backImageView;
+    }
 
     @Override
     public String toString() {

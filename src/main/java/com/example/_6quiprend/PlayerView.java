@@ -34,7 +34,7 @@ public class PlayerView {
 
     //---------------------------------------------------------------------------------------------
 
-    public PlayerView(Player player) {
+    public PlayerView(Player player, boolean isVisible, int row, int col) {
         this.component = new BorderPane();
 
         HBox buttonToolbars = new HBox();
@@ -42,14 +42,10 @@ public class PlayerView {
 
         centerArea = new Pane();
 
-//        Deck deck = game.getPlayerDeck();
-//        List<Card> retrievedCards = new ArrayList<>();
-//        RetrievedPack pack = new RetrievedPack(retrievedCards);
-//        Player player = new Player("Test", deck, pack);
         List<Card> cards = player.getDeck().getCards();
 
-        int row = 5;
-        int col = 5;
+//        int row = 5;
+//        int col = 3;
         for(Card card: cards) {
 
             CardView cardView = new CardView(card, cardWidth, cardHeight);
@@ -58,9 +54,9 @@ public class PlayerView {
 
             nodeSetLayoutAt(cardComponent, cardPosForRowCol(row, col));
 
-            cardComponent.setOnMouseClicked(e -> onMouseClickCard(e, cardView));
 
             centerArea.getChildren().add(cardComponent);
+            cardView.getFrontImageView().setVisible(isVisible);
             col++;
         }
 
