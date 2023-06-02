@@ -76,17 +76,7 @@ public class PlayerView {
         cardView.toggleCard();
         selectedCard = cardView.getCard();
 
-       /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("Choisissez une colonne où déposer votre carte");
-        alert.showAndWait();*/
 
-        NumberInputDialog dialog = new NumberInputDialog();
-        dialog.showAndWait().ifPresent(selectedNumber -> {
-            System.out.println("Selected number: " + selectedNumber);
-
-        });
     }
 
     protected static void nodeSetLayoutAt(Node node, Point2D pt) {
