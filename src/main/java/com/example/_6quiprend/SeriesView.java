@@ -22,8 +22,8 @@ public class SeriesView {
     private Pane centerArea;
     private Game game = new Game();
 
-    int cardWidth = 65;
-    int cardHeight = 115;
+    int cardWidth = 45;
+    int cardHeight = 80;
 
     Insets cardInsets = new Insets(2);
 
@@ -47,7 +47,7 @@ public class SeriesView {
 //        RetrievedPack pack = new RetrievedPack(retrievedCards);
 //        Player player = new Player("Test", deck, pack);
 
-        int row = 1;
+        int row = 2;
         int col = 6 + (position-1);
         for(Card card: cards) {
 

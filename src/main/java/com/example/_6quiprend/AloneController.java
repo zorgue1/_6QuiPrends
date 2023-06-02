@@ -91,6 +91,13 @@ public class AloneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plateau-view.fxml"));
         mainAnchorPane = (AnchorPane) loader.load();
 
+
+
+
+        Scene scene = new Scene(mainAnchorPane);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
         players = game.getPlayers();
         seriesListInTable = game.getSeriesListInTable();
         game.shuffleCards();
@@ -111,21 +118,14 @@ public class AloneController {
 
         game.initSeriesOnTable();
 
-        displayAllSeries();
-        displayPlayerView(aiView);
-        displayPlayerView(playerView);
-
-
-
-        Scene scene = new Scene(mainAnchorPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        //displayAllSeries();
+        //displayPlayerView(aiView);
+        //displayPlayerView(playerView);
 
         while(!game.areAllDecksEmpty(players)) {
-//            displayAllSeries();
-//
-//            displayPlayerView(aiView);
-//            displayPlayerView(playerView);
+            displayAllSeries();
+            displayPlayerView(aiView);
+            displayPlayerView(playerView);
 
             choixCarte(event);
 
@@ -165,7 +165,7 @@ public class AloneController {
                 } else {
                     boolean isPossible = false;
                     while (!isPossible) {
-
+                        choixSerie(event);
                         int index = seriesNb;
                         Series chosenSeries = seriesListInTable.get(index - 1);
                         Card lastCardInSeries = chosenSeries.getLastCardOf();
@@ -186,6 +186,7 @@ public class AloneController {
                             }
                         } else if (game.isCardTooWeak(playerCard)) {
                             System.out.println("Your card is too weak, please choose the series you want to take.");
+                            choixSerie(event);
                             int i = seriesNb;
                             game.processForCardTooWeak(i, currentPlayer, playerCard);
                             isPossible = true;
@@ -253,9 +254,9 @@ public class AloneController {
         dialog.setHeaderText(null);
         dialog.setContentText("Quel numéro de carte souhaitez-vous choisir?");
 
-        displayAllSeries();
-        displayPlayerView(aiView);
-        displayPlayerView(playerView);
+        //displayAllSeries();
+        //displayPlayerView(aiView);
+        //displayPlayerView(playerView);
 
         dialog.showAndWait().ifPresent(numCarte -> {
             try {
@@ -271,7 +272,6 @@ public class AloneController {
 
 
     public void choixSerie(ActionEvent event) {
-        Platform.runLater(() -> {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Choisir un numéro de série");
         dialog.setHeaderText(null);
@@ -287,7 +287,7 @@ public class AloneController {
                 System.out.println("Veuillez entrer un numéro valide");
             }
         });
-        });
+
     }
 
 
