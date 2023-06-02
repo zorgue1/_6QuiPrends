@@ -73,99 +73,147 @@ public class AloneController {
 
     }
 
-    public void suivant2(ActionEvent event) throws  IOException{
-
-        primaryStage =(Stage)((Node)event.getSource()).getScene().getWindow();
-//        switchScene("plateau-view.fxml");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("plateau-view.fxml"));
-        mainAnchorPane = (AnchorPane) loader.load();
-
-        players = game.getPlayers();
-        seriesListInTable = game.getSeriesListInTable();
-        game.shuffleCards();
-
-        Deck deck = game.getPlayerDeck();
-        List<Card> retrievedCards = new ArrayList<>();
-        RetrievedPack pack = new RetrievedPack(retrievedCards);
-        Player player = new Player(playerName, deck, pack);
-        players.add(player);
-
-        game.addAIPlayer();
-        Player ai = players.get(1);
-        PlayerView aiView = new PlayerView(ai, false,0, 3);
-
-
-        PlayerView playerView = new PlayerView(player, true,5, 3);
-
-
-
-        game.initSeriesOnTable();
-
+//    public void suivant2(ActionEvent event) throws  IOException{
+//
+//        primaryStage =(Stage)((Node)event.getSource()).getScene().getWindow();
+////        switchScene("plateau-view.fxml");
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("plateau-view.fxml"));
+//        mainAnchorPane = (AnchorPane) loader.load();
+//
+//        players = game.getPlayers();
+//        seriesListInTable = game.getSeriesListInTable();
+//        game.shuffleCards();
+//
+//        Deck deck = game.getPlayerDeck();
+//        List<Card> retrievedCards = new ArrayList<>();
+//        RetrievedPack pack = new RetrievedPack(retrievedCards);
+//        Player player = new Player(playerName, deck, pack);
+//        players.add(player);
+//
+//        game.addAIPlayer();
+//        Player ai = players.get(1);
+//        PlayerView aiView = new PlayerView(ai, false,0, 3);
+//
+//
+//        PlayerView playerView = new PlayerView(player, true,5, 3);
+//
+//
+//
+//        game.initSeriesOnTable();
+//
 //        while(!game.areAllDecksEmpty(players))
 //        {
-            displayAllSeries();
-
-            displayPlayerView(aiView);
-            displayPlayerView(playerView);
-
-//        List<Integer> chosenNumberList = getPlayerCardSelection(event);
-//        HashMap<Integer, Player> getPlayerFromChosenCard = game.mapPlayersToChosenCards(chosenNumberList);
+//            displayAllSeries();
 //
-//        Collections.sort(chosenNumberList);
-//        System.out.println("choosenNumberList" + chosenNumberList);
-
-
-//        }
-
-
-
-
-
-
-        Scene scene = new Scene(mainAnchorPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-
-
-//    private List<Integer> getPlayerCardSelection(ActionEvent event) {
-//        List<Integer> chosenNumberList = new ArrayList<>();
+//            displayPlayerView(aiView);
+//            displayPlayerView(playerView);
 //
-//        for (Player player : players) {
+//            List<Integer> chosenNumberList = getPlayerCardSelection();
+//            HashMap<Integer, Player> getPlayerFromChosenCard = game.mapPlayersToChosenCards(chosenNumberList);
 //
-//            if (player instanceof AI) {
-//                AI ai = (AI) player;
-//                Card aiCard = ai.getCard(seriesListInTable);
+//            Collections.sort(chosenNumberList);
 //
-//                if (aiCard != null) {
-//                    System.out.println("AI chose the card " + aiCard.toString());
+//            for (int number : chosenNumberList) {
+//                Card playerCard = new Card(number);
+//                Player currentPlayer = getPlayerFromChosenCard.get(number);
+//
+//                if (currentPlayer instanceof AI) {
+//                    AI aiPlayer = (AI) currentPlayer;
+//                    boolean aiCardTooWeak = false;
+//
+//                    if (game.getTheSeriesWithSmallestDifference(playerCard) == null) {
+//                        aiCardTooWeak = true;
+//                    }
+//
+//                    if (!aiCardTooWeak) {
+//                        Series aiSeries = game.getTheSeriesWithSmallestDifference(playerCard);
+//
+//                        if (aiSeries.getNbOfCard() == 5) {
+//                            game.processForFullSeries(aiPlayer, aiSeries, playerCard);
+//                            System.out.println("This series is full, so AI has retrieved the series " + aiSeries.getPosition() + ". The AI's card becomes the first card of the series.");
+//                        } else {
+//                            game.normalProcess(aiPlayer, aiSeries, playerCard);
+//                            System.out.println("AI chose series " + aiSeries.getPosition() + " for the card " + playerCard.toString());
+//                        }
+//                    } else {
+//                        Series aiSeries = aiPlayer.getSeriesToRetrieve(seriesListInTable);
+//                        game.processForCardTooWeak(aiSeries.getPosition(), aiPlayer, playerCard);
+//                        System.out.println("AI's card is too weak. It retrieved series " + aiSeries.getPosition() + ".");
+//                    }
 //                } else {
-//                    aiCard = ai.getCardTooWeak();
-//                    System.out.println("AI chose the card too weak " + aiCard.toString());
+//                    boolean isPossible = false;
+//                    while (!isPossible) {
+//                        displayAllSeries();
+//                        int index = scanner.getIntegerInRange(1, seriesListInTable.size());
+//                        Series chosenSeries = seriesListInTable.get(index - 1);
+//                        Card lastCardInSeries = chosenSeries.getLastCardOf();
+//
+//                        if (lastCardInSeries.getNumber() < number) {
+//                            if (game.getTheSeriesWithSmallestDifference(playerCard).getPosition() == chosenSeries.getPosition()) {
+//                                if (chosenSeries.getNbOfCard() == 5) {
+//                                    display.printText("This series is full, so you need to retrieve the cards of this series. Therefore, your card becomes the first card of the series.");
+//                                    game.processForFullSeries(currentPlayer, chosenSeries, playerCard);
+//                                    isPossible = true;
+//                                } else {
+//                                    game.normalProcess(currentPlayer, chosenSeries, playerCard);
+//                                    display.printText("You chose series " + chosenSeries.getPosition() + " for the card " + playerCard.toString());
+//                                    isPossible = true;
+//                                }
+//                            } else {
+//                                display.printTextInRed("You can't choose this series because the difference with the last card is not the smallest.");
+//                            }
+//                        } else if (game.isCardTooWeak(playerCard)) {
+//                            display.printTextInRed("Your card is too weak, please choose the series you want to take.");
+//                            int i = scanner.getIntegerInRange(1, seriesListInTable.size());
+//                            game.processForCardTooWeak(i, currentPlayer, playerCard);
+//                            isPossible = true;
+//                        } else {
+//                            display.printTextInRed("You can't choose this series because your card is smaller than the last card of the series.");
+//                        }
+//                    }
 //                }
-//
-//                int numberOfCard = aiCard.getNumber();
-//                chosenNumberList.add(numberOfCard);
-//                System.out.println("AI has finished choosing.");
-//            } else {
-//                System.out.println("Which card do you want to play?");
-//                int number = btnConfirm(event).getNumber();
-//                chosenNumberList.add(number);
 //            }
+//
+//
 //        }
 //
-//        return chosenNumberList;
+//
+//
+//
+//
+//
+//        Scene scene = new Scene(mainAnchorPane);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+//
 //    }
-//    public Card btnConfirm(ActionEvent e){
-//        if (selectedCard != null) {
-//            System.out.println("Selected card: " + selectedCard);
-//            return selectedCard;
-//        } else {
-//            System.out.println("Aucune carte sélectionnée");
-//            return null;
-//        }
-//    }
+
+
+    private List<Integer> getPlayerCardSelection() {
+        List<Integer> chosenNumberList = new ArrayList<>();
+
+        for (Player player : players) {
+            if (player instanceof AI) {
+                AI ai = (AI) player;
+                Card aiCard = ai.getCard(seriesListInTable);
+
+                if (aiCard != null) {
+                    System.out.println("AI chose the card " + aiCard.toString());
+                } else {
+                    aiCard = ai.getCardTooWeak();
+                    System.out.println("AI chose the card too weak " + aiCard.toString());
+                }
+
+                int numberOfCard = aiCard.getNumber();
+                chosenNumberList.add(numberOfCard);
+                System.out.println("AI has finished choosing.");
+            } else {
+                chosenNumberList.add(cardNb);
+            }
+        }
+
+        return chosenNumberList;
+    }
     public void displayPlayerView(PlayerView playerView){
         AnchorPane.setTopAnchor(playerView.getComponent(), 0.0);
         AnchorPane.setBottomAnchor(playerView.getComponent(), 0.0);
