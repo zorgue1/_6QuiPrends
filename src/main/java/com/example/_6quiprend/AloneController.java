@@ -29,6 +29,7 @@ public class AloneController {
     @FXML TextField nomJoueur;
 
     @FXML Button choixCarte;
+    @FXML Button choixSerie;
     @FXML Button rules;
     private List<String> nomsJoueurs = new ArrayList<>();
     HelloApplication helloApplication;
@@ -244,25 +245,30 @@ public class AloneController {
 
         dialog.showAndWait().ifPresent(numCarte -> {
             try {
-                cardNb = Integer.parseInt(numCarte);
-                System.out.println("Numéro de carte choisi : " + cardNb);
-
-                TextInputDialog serieDialog = new TextInputDialog();
-                serieDialog.setTitle("Choisir une série");
-                serieDialog.setHeaderText(null);
-                serieDialog.setContentText("Quelle série souhaitez-vous choisir entre 1 et 4?");
-
-                serieDialog.showAndWait().ifPresent(numSerie -> {
-                    try {
-                        seriesNb = Integer.parseInt(numSerie);
-                        System.out.println("Numéro de série choisi : " + seriesNb);
-                        // Faites quelque chose avec le numéro de série choisi (stockage, traitement, etc.)
-                    } catch (NumberFormatException e) {
-                        System.out.println("Veuillez entrer un numéro de série valide");
-                    }
-                });
+                int numeroCarte = Integer.parseInt(numCarte);
+                // Faites quelque chose avec le numéro de carte choisi (stockage, traitement, etc.)
+                System.out.println("Numéro de carte choisi : " + numeroCarte);
             } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer un numéro de carte valide");
+                // Gérer le cas où l'utilisateur entre une valeur non numérique
+                System.out.println("Veuillez entrer un numéro valide");
+            }
+        });
+    }
+
+    public void choixSerie(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Choisir un numéro de série");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Quel numéro de série souhaitez-vous choisir?");
+
+        dialog.showAndWait().ifPresent(numSerie -> {
+            try {
+                int numeroSerie = Integer.parseInt(numSerie);
+                // Faites quelque chose avec le numéro de carte choisi (stockage, traitement, etc.)
+                System.out.println("Numéro de série choisi : " + numeroSerie);
+            } catch (NumberFormatException e) {
+                // Gérer le cas où l'utilisateur entre une valeur non numérique
+                System.out.println("Veuillez entrer un numéro valide");
             }
         });
     }
