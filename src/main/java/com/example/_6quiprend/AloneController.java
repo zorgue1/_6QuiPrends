@@ -74,40 +74,40 @@ public class AloneController {
 
     }
 
-//    public void suivant2(ActionEvent event) throws  IOException{
-//
-//        primaryStage =(Stage)((Node)event.getSource()).getScene().getWindow();
-////        switchScene("plateau-view.fxml");
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("plateau-view.fxml"));
-//        mainAnchorPane = (AnchorPane) loader.load();
-//
-//        players = game.getPlayers();
-//        seriesListInTable = game.getSeriesListInTable();
-//        game.shuffleCards();
-//
-//        Deck deck = game.getPlayerDeck();
-//        List<Card> retrievedCards = new ArrayList<>();
-//        RetrievedPack pack = new RetrievedPack(retrievedCards);
-//        Player player = new Player(playerName, deck, pack);
-//        players.add(player);
-//
-//        game.addAIPlayer();
-//        Player ai = players.get(1);
-//        PlayerView aiView = new PlayerView(ai, false,0, 3);
-//
-//
-//        PlayerView playerView = new PlayerView(player, true,5, 3);
-//
-//
-//
-//        game.initSeriesOnTable();
+    public void suivant2(ActionEvent event) throws  IOException{
+
+        primaryStage =(Stage)((Node)event.getSource()).getScene().getWindow();
+//        switchScene("plateau-view.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("plateau-view.fxml"));
+        mainAnchorPane = (AnchorPane) loader.load();
+
+        players = game.getPlayers();
+        seriesListInTable = game.getSeriesListInTable();
+        game.shuffleCards();
+
+        Deck deck = game.getPlayerDeck();
+        List<Card> retrievedCards = new ArrayList<>();
+        RetrievedPack pack = new RetrievedPack(retrievedCards);
+        Player player = new Player(playerName, deck, pack);
+        players.add(player);
+
+        game.addAIPlayer();
+        Player ai = players.get(1);
+        PlayerView aiView = new PlayerView(ai, false,0, 3);
+
+
+        PlayerView playerView = new PlayerView(player, true,5, 3);
+
+
+
+        game.initSeriesOnTable();
 //
 //        while(!game.areAllDecksEmpty(players))
 //        {
-//            displayAllSeries();
-//
-//            displayPlayerView(aiView);
-//            displayPlayerView(playerView);
+            displayAllSeries();
+
+            displayPlayerView(aiView);
+            displayPlayerView(playerView);
 //
 //            List<Integer> chosenNumberList = getPlayerCardSelection();
 //            HashMap<Integer, Player> getPlayerFromChosenCard = game.mapPlayersToChosenCards(chosenNumberList);
@@ -183,11 +183,11 @@ public class AloneController {
 //
 //
 //
-//        Scene scene = new Scene(mainAnchorPane);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//
-//    }
+        Scene scene = new Scene(mainAnchorPane);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
 
 
     private List<Integer> getPlayerCardSelection() {
