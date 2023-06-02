@@ -7,12 +7,12 @@ import java.util.*;
 
 public class Main {
 
-    Game game;
-    Display display;
-    Scanner scanner;
+    private Game game;
+    private Display display;
+    private Scanner scanner;
 
-    List<Player> players;
-    List<Series> seriesListInTable;
+    private List<Player> players;
+    private List<Series> seriesListInTable;
 
     public Main(InputStream is) {
         this.game = new Game();

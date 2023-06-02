@@ -36,6 +36,8 @@ public class AloneController {
     private List<Player> players;
     private List<Series> seriesListInTable;
     private String playerName;
+    private int seriesNb;
+    private int cardNb;
     AnchorPane mainAnchorPane;
 
     public void switchScene(String fxml) throws IOException{
@@ -194,8 +196,8 @@ public class AloneController {
 
         dialog.showAndWait().ifPresent(numCarte -> {
             try {
-                int numeroCarte = Integer.parseInt(numCarte);
-                System.out.println("Numéro de carte choisi : " + numeroCarte);
+                cardNb = Integer.parseInt(numCarte);
+                System.out.println("Numéro de carte choisi : " + cardNb);
 
                 TextInputDialog serieDialog = new TextInputDialog();
                 serieDialog.setTitle("Choisir une série");
@@ -204,8 +206,8 @@ public class AloneController {
 
                 serieDialog.showAndWait().ifPresent(numSerie -> {
                     try {
-                        int numeroSerie = Integer.parseInt(numSerie);
-                        System.out.println("Numéro de série choisi : " + numeroSerie);
+                        seriesNb = Integer.parseInt(numSerie);
+                        System.out.println("Numéro de série choisi : " + seriesNb);
                         // Faites quelque chose avec le numéro de série choisi (stockage, traitement, etc.)
                     } catch (NumberFormatException e) {
                         System.out.println("Veuillez entrer un numéro de série valide");
