@@ -4,3 +4,11 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
+
+.custom-alert {
+    -fx-pref-width: 600px;  /* Largeur souhaitée */
+    -fx-pref-height: 700px; /* Hauteur souhaitée */
+}
+.custom-alert .label {
+    -fx-font-size: 10px;  /* Taille de police souhaitée */
+}

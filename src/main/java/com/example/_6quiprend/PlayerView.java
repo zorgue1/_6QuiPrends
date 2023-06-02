@@ -5,6 +5,7 @@ import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +28,7 @@ public class PlayerView {
 
     Insets cardInsets = new Insets(2);
     public static Card selectedCard;
+
 
     int currEndRow = 7;
     int currEndCol = 4;
@@ -73,6 +75,18 @@ public class PlayerView {
         System.out.println("onMouseClickCard => toggle card " + cardView);
         cardView.toggleCard();
         selectedCard = cardView.getCard();
+
+       /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Choisissez une colonne où déposer votre carte");
+        alert.showAndWait();*/
+
+        NumberInputDialog dialog = new NumberInputDialog();
+        dialog.showAndWait().ifPresent(selectedNumber -> {
+            System.out.println("Selected number: " + selectedNumber);
+
+        });
     }
 
     protected static void nodeSetLayoutAt(Node node, Point2D pt) {

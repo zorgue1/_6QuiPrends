@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 
-import static com.example._6quiprend.PlayerView.selectedCard;
+//import static com.example._6quiprend.PlayerView.selectedCard;
 
 public class AloneController {
 

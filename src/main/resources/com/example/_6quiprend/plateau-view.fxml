@@ -14,9 +14,11 @@
          </image>
       </ImageView>
       <BorderPane fx:id="mainBorderPane" layoutX="228.0" layoutY="445.0" prefHeight="200.0" prefWidth="200.0">
-         <top>
-            <Button fx:id="btnConfirm" mnemonicParsing="false" text="Confirm" BorderPane.alignment="CENTER" />
-         </top>
+         <center>
+            <Button fx:id="choixCarte" mnemonicParsing="false" onAction="#choixCarte" text="choix de carte " BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
+      <Button fx:id="back" layoutX="68.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: black;" text="RETURN HOME" textFill="#af00c4" />
+      <Button fx:id="rules" layoutX="91.0" layoutY="57.0" mnemonicParsing="false" onAction="#rules" style="-fx-background-color: black;" text="RULES" textFill="#af00c4" />
    </children>
 </AnchorPane>

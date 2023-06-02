@@ -171,7 +171,7 @@ public class Game {
         Collections.shuffle(allCard);
     }
 
-    public static void rules(){
+    public static String rules(){
         String rules = "Nombre de joueurs : 2 à 10 joueurs\n" +
                 "Principe : Les cartes ont deux valeurs :\n" +
                 "– Un numéro allant de 1 à 104.\n" +
@@ -205,6 +205,7 @@ public class Game {
                 "Chaque joueur compte alors ses points négatifs dans sa pile de TdB.\n" +
                 "On note le résultat de chaque joueur sur une feuille de papier et on commence une nouvelle manche.\n" +
                 "On joue plusieurs manches jusqu’à ce que l’un des joueurs ait réuni en tout plus de 66 têtes de bœuf. Le vainqueur de la partie est alors le joueur qui a le moins de têtes de bœuf. Avant le début du jeu, il est bien sûr possible de convenir d’un autre total de points ou d’un nombre de manches maximum." ;
+        return rules;
     }
 
 }
