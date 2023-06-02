@@ -1,6 +1,6 @@
 package com.example._6quiprend;
 
-import com.isep._6quiprend.core.Game;
+import com.isep._6quiprend.core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class PlateauController {
 
@@ -122,5 +125,8 @@ public class PlateauController {
 
         alert.showAndWait();
     }
+
+
+
 
 }
