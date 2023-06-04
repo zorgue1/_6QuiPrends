@@ -18,22 +18,22 @@
             <Image url="@image/6_qui_prend_!.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="playAlone" layoutX="170.0" layoutY="536.0" mnemonicParsing="false" onAction="#playAlone" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Play Alone ">
+      <Button fx:id="playAlone" layoutX="170.0" layoutY="536.0" mnemonicParsing="false" onAction="#playAlone" style="-fx-background-color: white; -fx-background-radius: 100px;" text="Play Alone " textFill="#542183">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="multiPlay" layoutX="166.0" layoutY="597.0" mnemonicParsing="false" onAction="#multiPlay" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="Multi Player">
+      <Button fx:id="multiPlay" layoutX="166.0" layoutY="597.0" mnemonicParsing="false" onAction="#multiPlay" style="-fx-background-color: white; -fx-background-radius: 100px;" text="Multi Player" textFill="#542183">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="play" layoutX="120.0" layoutY="526.0" mnemonicParsing="false" onAction="#play" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="PLAY">
+      <Button fx:id="play" layoutX="120.0" layoutY="528.0" mnemonicParsing="false" onAction="#play" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 100px;" text="PLAY" textFill="#542183">
          <font>
             <Font size="58.0" />
          </font>
       </Button>
-      <Button fx:id="rules" layoutX="785.0" layoutY="526.0" mnemonicParsing="false" onAction="#rules" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: purple; -fx-background-radius: 100px;" text="RULES">
+      <Button fx:id="rules" layoutX="785.0" layoutY="526.0" mnemonicParsing="false" onAction="#rules" prefHeight="123.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 100px;" text="RULES" textFill="#542183">
          <font>
             <Font size="58.0" />
          </font>

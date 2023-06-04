@@ -98,7 +98,11 @@ public class AloneController {
 
             playerName = nomJoueurActuel;
             nomsJoueurs.add(nomJoueurActuel);
-            texte.setText(nomJoueurActuel + " participe ! vas tu réussir à battre notre IA ?");
+            texte.setText(" Hello " + nomJoueurActuel + ", you will begin the game 6 qui prend ! ");
+            texte.setLayoutX(260);
+            texte.setLayoutY(100);
+            texte.setStyle("-fx-font-size: 35px;");
+            texte.setTextFill(Color.WHITE);
 
 
         }
@@ -264,17 +268,21 @@ public class AloneController {
         mainBorderPane.setPrefHeight(200);
         mainBorderPane.setPrefWidth(200);
 
-        Button choixCarte = new Button("choix de carte");
+        Button choixCarte = new Button("Card Choice");
         choixCarte.setOnAction(this::choixCarte);
         BorderPane.setAlignment(choixCarte, Pos.CENTER_LEFT);
-        choixCarte.setLayoutX(30);
+        choixCarte.setLayoutX(73);
         choixCarte.setLayoutY(622);
+        choixCarte.setStyle("-fx-background-color: white;");
+        choixCarte.setTextFill(Color.valueOf("#542183"));
 
-        Button choixSerie = new Button("choix série");
+        Button choixSerie = new Button("Series Choice");
         choixSerie.setOnAction(this::choixSerie);
         BorderPane.setAlignment(choixSerie, Pos.CENTER_RIGHT);
-        choixSerie.setLayoutX(40);
-        choixSerie.setLayoutY(662);
+        choixSerie.setLayoutX(69);
+        choixSerie.setLayoutY(661);
+        choixSerie.setStyle("-fx-background-color: white;");
+        choixSerie.setTextFill(Color.valueOf("#542183"));
 
         Button back = new Button("RETURN HOME");
         back.setLayoutX(68);
@@ -286,8 +294,8 @@ public class AloneController {
                 e.printStackTrace();
             }
         });
-        back.setStyle("-fx-background-color: black;");
-        back.setTextFill(Color.valueOf("#af00c4"));
+        back.setStyle("-fx-background-color: white;");
+        back.setTextFill(Color.valueOf("#542183"));
 
         Button rules = new Button("RULES");
         rules.setLayoutX(91);
@@ -299,8 +307,8 @@ public class AloneController {
                 e.printStackTrace();
             }
         });
-        rules.setStyle("-fx-background-color: black;");
-        rules.setTextFill(Color.valueOf("#af00c4"));
+        rules.setStyle("-fx-background-color: white;");
+        rules.setTextFill(Color.valueOf("#542183"));
 
         Label indexLabel1 = new Label("1");
         indexLabel1.setLayoutX(280);

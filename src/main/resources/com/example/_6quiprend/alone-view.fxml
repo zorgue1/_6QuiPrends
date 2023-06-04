@@ -15,12 +15,12 @@
             <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="nomJoueur" alignment="CENTER" layoutX="502.0" layoutY="316.0" promptText="NAME ?">
+      <TextField fx:id="nomJoueur" alignment="CENTER" layoutX="460.0" layoutY="330.0" promptText="NAME ?">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="back" layoutX="60.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: black;" text="RETURN" textFill="#af00c4">
+      <Button fx:id="back" layoutX="60.0" layoutY="47.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="RETURN" textFill="#542183">
          <font>
             <Font size="18.0" />
          </font>
@@ -30,18 +30,21 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Label layoutX="461.0" layoutY="603.0" style="-fx-background-color: black;" text="Vous êtes dans le mode solo, vous aller donc affronter une IA !" textFill="RED" />
-      <Button fx:id="suivant2" layoutX="556.0" layoutY="417.0" mnemonicParsing="false" onAction="#suivant2" text="SUIVANT !">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="550.0" style="-fx-background-color: white;" text="    You are in Alone Mode, you will play with an AI    " textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="suivant2" contentDisplay="CENTER" layoutX="530.0" layoutY="440.0" mnemonicParsing="false" onAction="#suivant2" text="Next !">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="suivant" layoutX="556.0" layoutY="417.0" mnemonicParsing="false" onAction="#suivant" text="SUIVANT !">
+      <Button fx:id="suivant" contentDisplay="CENTER" layoutX="530.0" layoutY="440.0" mnemonicParsing="false" onAction="#suivant" text="Next !">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label layoutX="471.0" layoutY="45.0" style="-fx-background-color: BLACK;" text="ENTRER LE NOM DU JOUEUR" textFill="#af00c4">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="259.0" style="-fx-background-color: white;" text="    Enter your name    " textFill="#542183">
          <font>
             <Font size="24.0" />
          </font>
