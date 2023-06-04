@@ -358,7 +358,6 @@ public class AloneController {
 
                 int numberOfCard = aiCard.getNumber();
                 chosenNumberList.add(numberOfCard);
-                showInfoPopup("AI","AI has finished choosing.");
             } else {
                 chosenNumberList.add(cardNb);
             }
@@ -427,19 +426,7 @@ public class AloneController {
 
 
     public void choixSerie(ActionEvent event) {
-        Card card = new Card(cardNb);
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Choose a series number");
-        dialog.setHeaderText(null);
-        dialog.setContentText("What series number would you like to choose? For the card " + card);
-
-        dialog.showAndWait().ifPresent(numSerie -> {
-            try {
-                seriesNb = getIntegerInRange(1, 4);
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Enter a valid integer");
-            }
-        });
+        seriesNb = getIntegerInRange(1,4);
     }
 
     public boolean isValidIntegerInRange(int number, int min, int max) {
@@ -454,14 +441,14 @@ public class AloneController {
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Enter a number within the range");
             dialog.setHeaderText(null);
-            dialog.setContentText("Enter a number within the range (" + min + " - " + max + ") for the card " + card.toString());
+            dialog.setContentText("What series number would you like to choose? For the card " + card);
 
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
                 try {
                     number = Integer.parseInt(result.get());
                     if (!isValidIntegerInRange(number, min, max)) {
-                        showErrorPopup("Error: Enter a number within the specified range (" + min + " - " + max + ")");
+                        showErrorPopup("Error: Enter a number within the range (" + min + " - " + max + ")");
                         validInput = false;
                     }
                 } catch (NumberFormatException e) {
