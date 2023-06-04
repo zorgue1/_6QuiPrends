@@ -22,8 +22,8 @@ public class SeriesView {
     private Pane centerArea;
     private Game game = new Game();
 
-    int cardWidth = 45;
-    int cardHeight = 80;
+    int cardWidth = 65;
+    int cardHeight = 115;
 
     Insets cardInsets = new Insets(2);
 
@@ -47,8 +47,8 @@ public class SeriesView {
 //        RetrievedPack pack = new RetrievedPack(retrievedCards);
 //        Player player = new Player("Test", deck, pack);
 
-        int row = 2;
-        int col = 6 + (position-1);
+        int row = 1 + (position-1);
+        int col = 5;
         for(Card card: cards) {
 
             CardView cardView = new CardView(card, cardWidth, cardHeight);
@@ -60,7 +60,7 @@ public class SeriesView {
             cardComponent.setOnMouseClicked(e -> onMouseClickCard(e, cardView));
 
             centerArea.getChildren().add(cardComponent);
-            row++;
+            col++;
         }
 
 

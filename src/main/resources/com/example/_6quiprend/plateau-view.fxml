@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
 <AnchorPane fx:id="mainAnchorPane" prefHeight="400.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example._6quiprend.AloneController">
    <children>
       <ImageView fitHeight="773.0" fitWidth="1164.0" pickOnBounds="true" preserveRatio="true">
@@ -13,15 +12,40 @@
             <Image url="@image/tapis.jpg" />
          </image>
       </ImageView>
-      <BorderPane fx:id="mainBorderPane" layoutX="228.0" layoutY="445.0" prefHeight="200.0" prefWidth="200.0">
-         <left>
-            <Button fx:id="choixCarte" mnemonicParsing="false" onAction="#choixCarte" text="choix de carte " BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <Button fx:id="choixSerie" mnemonicParsing="false" onAction="#choixSerie" text="choix série" BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
+      <BorderPane fx:id="mainBorderPane" layoutX="228.0" layoutY="445.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="back" layoutX="68.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: black;" text="RETURN HOME" textFill="#af00c4" />
       <Button fx:id="rules" layoutX="91.0" layoutY="57.0" mnemonicParsing="false" onAction="#rules" style="-fx-background-color: black;" text="RULES" textFill="#af00c4" />
+      <Button fx:id="choixCarte" layoutX="30.0" layoutY="622.0" mnemonicParsing="false" onAction="#choixCarte" text="choix de carte " />
+      <Button fx:id="choixSerie" layoutX="40.0" layoutY="662.0" mnemonicParsing="false" onAction="#choixSerie" text="choix série" />
+      <Label layoutX="280.0" layoutY="156.0" text="1">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="280.0" layoutY="269.0" text="1">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="280.0" layoutY="379.0" text="1">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="281.0" layoutY="480.0" text="1">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="200.0" layoutY="622.0" text="Player's score:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="200.0" layoutY="57.0" text="AI's score:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

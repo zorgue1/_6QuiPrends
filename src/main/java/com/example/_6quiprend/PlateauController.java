@@ -1,6 +1,6 @@
 package com.example._6quiprend;
 
-import com.isep._6quiprend.core.*;
+import com.isep._6quiprend.core.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +14,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 
 public class PlateauController {
 
@@ -31,6 +29,9 @@ public class PlateauController {
     @FXML Button back;
 
     @FXML Button choixCarte;
+    @FXML
+    private ImageView imageView;
+
 
 
 
@@ -125,8 +126,5 @@ public class PlateauController {
 
         alert.showAndWait();
     }
-
-
-
 
 }
