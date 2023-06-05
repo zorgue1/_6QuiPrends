@@ -231,6 +231,7 @@ public class AloneController {
 
         List<Player> winners = game.determineWinner();
         showInfoPopup("Winner", "The winner(s) with the lowest points: " + winners.toString());
+        //TODO: page fin du jeu
 
     }
 
