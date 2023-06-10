@@ -223,10 +223,6 @@ public class AloneController {
                             choixSerie(event);
                             int i = seriesNb;
                             game.processForCardTooWeak(i, currentPlayer, playerCard);
-                            System.out.println("series " + seriesListInTable.get(0).getCardsInTable());
-                            System.out.println("series " + seriesListInTable.get(1).getCardsInTable());
-                            System.out.println("series " + seriesListInTable.get(2).getCardsInTable());
-                            System.out.println("series " + seriesListInTable.get(3).getCardsInTable());
                             mainAnchorPane.getChildren().clear();
                             setupUI();
                             displayAllSeries();
