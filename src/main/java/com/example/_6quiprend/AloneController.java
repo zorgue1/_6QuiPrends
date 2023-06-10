@@ -188,6 +188,10 @@ public class AloneController {
 //                        showPopup("You can't choose this series because the difference with the last card is not the smallest.");
                         showInfoPopup("AI", "AI's card is too weak. It retrieved series " + aiSeries.getPosition() + ".");
                     }
+                    setupUI();
+                    displayAllSeries();
+                    displayPlayerView(ai, false, 0,3);
+                    displayPlayerView(player, true, 5, 3);
                 } else {
                     boolean isPossible = false;
                     while (!isPossible) {
@@ -218,11 +222,20 @@ public class AloneController {
                             choixSerie(event);
                             int i = seriesNb;
                             game.processForCardTooWeak(i, currentPlayer, playerCard);
+                            setupUI();
+                            displayAllSeries();
+                            displayPlayerView(ai, false, 0,3);
+                            displayPlayerView(player, true, 5, 3);
                             isPossible = true;
                         } else {
                             showErrorPopup("You can't choose this series because the difference with the last card is not the smallest.");
 //                            System.out.println("You can't choose this series because your card is smaller than the last card of the series.");
                         }
+
+                        setupUI();
+                        displayAllSeries();
+                        displayPlayerView(ai, false, 0,3);
+                        displayPlayerView(player, true, 5, 3);
                     }
                 }
             }
